@@ -179,6 +179,7 @@ public class MapsActivity extends AppCompatActivity{
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
         //  mMap.setInfoWindowAdapter(this);
 
+
         //Marker 2
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3469988, -6.2563745))
