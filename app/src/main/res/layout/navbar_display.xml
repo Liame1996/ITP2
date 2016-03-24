@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navBar">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageView"
+            android:src="@mipmap/ic_launcher"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/homeBtn"
+            android:background="#00000000"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:src="@drawable/ic_home" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/locationBtn"
+            android:src="@drawable/ic_location_on"
+            android:background="#00000000"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:padding="10dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/addVenueBtn"
+            android:src="@drawable/ic_add"
+            android:background="#00000000"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:onClick="setContentView"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/cocktailsBtn"
+            android:src="@drawable/ic_local_bar"
+            android:background="#00000000"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

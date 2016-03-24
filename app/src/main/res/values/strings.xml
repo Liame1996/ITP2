@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ITP</string>
+    <string name="action_settings">Settings</string>
+    <string name="email">Email:</string>
+    <string name="emailMessage">Message:</string>
+    <string name="nameTV">Venue Name:</string>
+
+    <string-array name="type">
+        <item> Bar</item>
+        <item> Club</item>
+        <item> Restaurant</item>
+    </string-array>
+    <string name="title_activity_display">DisplayActivity</string>
+    <string name="enterDetailsTitle">Enter your details here!</string>
+    <string name="venueNameTV">Venue Name:</string>
+    <string name="typeTV">Type:</string>
+    <string name="addressTV">Address:</string>
+    <string name="emailTV">Email:</string>
+    <string name="phoneTV">Phone:</string>
+    <string name="displayBtn">Display</string>
+    <string name="addBtn">Add</string>
+    <string name="countdownTV">Countdown:</string>
+    <string name="title_activity_itp2">itp2</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_main_add_detail">MainAddDetailActivity</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="Search"> Search</string>
+    <string name="typeHolder"> Type Holder</string>
+    <string name="zoomHolder"> Zoom Holder</string>
+    <string name="title_activity_maps2">Map2</string>
+    <string name="title_activity_cocktail_screen">CocktailScreen</string>
+</resources>
