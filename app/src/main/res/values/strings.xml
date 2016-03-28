@@ -44,4 +44,5 @@
         <item> Pub </item>
         <item> Restaurant </item>
     </string-array>
+    <string name="title_activity_facebook">FacebookActivity</string>
 </resources>
