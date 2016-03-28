@@ -29,4 +29,18 @@
     <string name="zoomHolder"> Zoom Holder</string>
     <string name="title_activity_maps2">Map2</string>
     <string name="title_activity_cocktail_screen">CocktailScreen</string>
+
+    <string-array name="markerType">
+        <!-- IF ONE OF THESE IS SELECTED IT NARROWS THE DROPDOWN MENU BELOW AND SHOWING INLY MARKERS FROM SELECTED ON MAP -->
+        <item> Bar/Club </item>
+        <item> Pub </item>
+        <item> Restaurant </item>
+    </string-array>
+
+    <string-array name="markerPlaces">
+        <!-- GET LIST OF PLACES FROM DATABASE -->
+        <item> Bar/Club </item>
+        <item> Pub </item>
+        <item> Restaurant </item>
+    </string-array>
 </resources>

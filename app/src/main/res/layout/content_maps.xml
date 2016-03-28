@@ -114,22 +114,46 @@
                 android:textAlignment="center"
                 android:layout_weight="5"
                 android:layout_marginTop="5dp" /> -->
-            <EditText
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
-                android:text="Filter " />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Filter"
+                android:id="@+id/filterTV"
+                android:textSize="30sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="6dp" />
 
             <ImageView
                 android:layout_width="23dp"
                 android:layout_height="36dp"
-                android:id="@+id/imageView4"
-                android:src="@drawable/filter" />
+                android:id="@+id/filterIV"
+                android:src="@drawable/filter"
+                android:layout_marginTop="10dp" />
 
-            <ExpandableListView
+            <!-- USE IF STATEMENTS TO SHOW MARKERS OF ONLY WHAT IS SELECTED, EASIER TO FIGURE OUT THEN CUSTOMISED MAP SEARCH -->
+
+            <Spinner
+                android:layout_width="110dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/type"
+                android:spinnerMode="dropdown"
+                android:entries="@array/markerType"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp" />
+
+            <Spinner
                 android:layout_width="wrap_content"
-                android:layout_height="59dp"
-                android:id="@+id/expandableListView" />
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"
+                android:spinnerMode="dropdown"
+                android:entries="@array/markerPlaces"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:layout_gravity="right" />
+
         </LinearLayout>
 
 

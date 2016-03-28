@@ -104,7 +104,7 @@ public class MapsActivity extends AppCompatActivity{
         setUpMapIfNeeded();
     }
 
-    public void onSearch(View view) throws IOException {
+    /* public void onSearch(View view) throws IOException {
         EditText location_tF = (EditText)findViewById(R.id.TFaddress);
         // gets text from search bar and turns it into a String named location
         String location = location_tF.getText().toString();
@@ -132,7 +132,7 @@ public class MapsActivity extends AppCompatActivity{
 // So that keyboard disappears after search
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-    }
+    } */
 
 
 
@@ -169,6 +169,8 @@ public class MapsActivity extends AppCompatActivity{
     }
 
     public void setUpMap() {
+
+        /* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU */
 
         // Marker 1
 
