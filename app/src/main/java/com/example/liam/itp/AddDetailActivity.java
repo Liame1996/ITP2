@@ -68,15 +68,6 @@ public class AddDetailActivity extends AppCompatActivity {
             }
         });
 
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AddDetailActivity.this, DisplayActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-
 
     }
 

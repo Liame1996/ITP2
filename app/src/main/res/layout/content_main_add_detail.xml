@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:paddingBottom="0dp"
-android:paddingLeft="0dp"
-android:paddingRight="0dp"
-android:paddingTop="0dp"
-tools:context=".AddDetailActivity"
-tools:showIn="@layout/activity_main_add_detail"
-android:background="@drawable/bg">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".AddDetailActivity"
+    tools:showIn="@layout/activity_main_add_detail"
+    android:background="@drawable/bg">
 
-<include layout="@layout/navbar_display"
-    android:id="@+id/navBar"/>
+
 
 <ScrollView
     android:layout_width="match_parent"

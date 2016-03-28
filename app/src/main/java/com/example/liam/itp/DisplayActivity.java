@@ -54,7 +54,7 @@ public class DisplayActivity extends AppCompatActivity {
         nextButton = (Button)findViewById(R.id.nextBtn);
         addButton = (Button)findViewById(R.id.addBtn);
 
-        //new getClubDetails().execute();
+        new getClubDetails().execute();
         initUI();
         countDownStart();
 
