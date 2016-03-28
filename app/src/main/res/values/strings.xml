@@ -29,6 +29,7 @@
     <string name="zoomHolder"> Zoom Holder</string>
     <string name="title_activity_maps2">Map2</string>
     <string name="title_activity_cocktail_screen">CocktailScreen</string>
+    <string name="facebook_app_id">1540718176222681</string>
 
     <string-array name="markerType">
         <!-- IF ONE OF THESE IS SELECTED IT NARROWS THE DROPDOWN MENU BELOW AND SHOWING INLY MARKERS FROM SELECTED ON MAP -->
