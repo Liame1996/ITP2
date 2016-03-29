@@ -50,6 +50,8 @@ public class itp2 extends AppCompatActivity {
         AppEventsLogger.deactivateApp(this);
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
