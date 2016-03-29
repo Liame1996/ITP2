@@ -1,6 +1,7 @@
 package com.example.liam.itp;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,11 +20,21 @@ public class FragmentOne extends Fragment {
     }
 
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_one_layout,container, false);
+
+        View view = inflater.inflate(R.layout.fragment_one_layout, container,false);
+
+            ImageButton goTo = (ImageButton) view.findViewById(R.id.diceys);
+            goTo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    Intent i = new Intent(getActivity(), DisplayActivity.class);
+                    getActivity().startActivity(i);
+                }
+            });
+        return view;
     }
+
+
 }
