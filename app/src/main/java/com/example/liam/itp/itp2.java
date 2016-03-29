@@ -35,20 +35,20 @@ public class itp2 extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(this);
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        // Logs 'install' and 'app activate' App Events.
+//        AppEventsLogger.activateApp(this);
+//    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        // Logs 'app deactivate' App Event.
+//        AppEventsLogger.deactivateApp(this);
+//    }
 
 
 
@@ -56,7 +56,7 @@ public class itp2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itp2);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        //FacebookSdk.sdkInitialize(getApplicationContext());
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -71,24 +71,6 @@ public class itp2 extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        diceys = (ImageButton)findViewById(R.id.diceys);
-        palace = (ImageButton)findViewById(R.id.palace);
-        dtwo = (ImageButton)findViewById(R.id.dtwo);
-        everleigh = (ImageButton)findViewById(R.id.everleigh);
-        coppers = (ImageButton)findViewById(R.id.coppers);
-
-//        diceys.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(itp2.this, DisplayActivity.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
-
-
-
 
     }
 
