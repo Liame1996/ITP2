@@ -130,8 +130,10 @@
                 android:layout_width="23dp"
                 android:layout_height="36dp"
                 android:id="@+id/filterIV"
-                android:src="@drawable/filter"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                />
+
+            <!-- android:src="@drawable/filter" -->
 
             <!-- USE IF STATEMENTS TO SHOW MARKERS OF ONLY WHAT IS SELECTED, EASIER TO FIGURE OUT THEN CUSTOMISED MAP SEARCH -->
 
