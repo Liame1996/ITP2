@@ -22,7 +22,7 @@ public class FragmentThree extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_one_layout, container,false);
+        View view = inflater.inflate(R.layout.fragment_three_layout, container,false);
 
 
         ImageButton goTo = (ImageButton) view.findViewById(R.id.captains);
