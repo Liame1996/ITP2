@@ -35,28 +35,11 @@ public class itp2 extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        // Logs 'install' and 'app activate' App Events.
-//        AppEventsLogger.activateApp(this);
-//    }
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        // Logs 'app deactivate' App Event.
-//        AppEventsLogger.deactivateApp(this);
-//    }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itp2);
-        //FacebookSdk.sdkInitialize(getApplicationContext());
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
