@@ -32,6 +32,8 @@ public class FragmentOne extends Fragment {
                 public void onClick(View v){
                     Intent i = new Intent(getActivity(), DisplayActivity.class);
                     getActivity().startActivity(i);
+                    DisplayActivity disp = new DisplayActivity();
+                    disp.new getClubDetails().execute();
                 }
             });
             ImageButton goTo2 = (ImageButton) view.findViewById(R.id.palace);

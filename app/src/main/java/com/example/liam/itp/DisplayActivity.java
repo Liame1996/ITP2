@@ -54,7 +54,7 @@ public class DisplayActivity extends AppCompatActivity {
         nextButton = (Button)findViewById(R.id.nextBtn);
         addButton = (Button)findViewById(R.id.addBtn);
 
-        new getClubDetails().execute();
+        //new getClubDetails().execute();
         initUI();
         countDownStart();
 
@@ -206,7 +206,7 @@ public class DisplayActivity extends AppCompatActivity {
 
 
         //CLUB DETAILS
-        private class getClubDetails extends AsyncTask<Void, Void, Void> {
+        public class getClubDetails extends AsyncTask<Void, Void, Void> {
             private ProgressDialog pDialog;
 
             @Override
