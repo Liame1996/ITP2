@@ -29,7 +29,7 @@ import java.util.List;
 public class itp2 extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ImageButton diceys, palace, dtwo, everleigh, coppers;
+
 
 
     private ViewPager mViewPager;

@@ -48,7 +48,7 @@
                 <ImageButton
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:id="@+id/imageButton27"
+                    android:id="@+id/captains"
                     android:src="@drawable/captains"/>
             </LinearLayout>
 
@@ -60,7 +60,7 @@
                 <ImageButton
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:id="@+id/imageButton28"
+                    android:id="@+id/tgif"
                     android:src="@drawable/tgif"/>
             </LinearLayout>
 
@@ -72,7 +72,7 @@
                 <ImageButton
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:id="@+id/imageButton29"
+                    android:id="@+id/counter"
                     android:src="@drawable/counter"/>
             </LinearLayout>
 
@@ -84,7 +84,7 @@
                 <ImageButton
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:id="@+id/imageButton30"
+                    android:id="@+id/aussiebbq"
                     android:src="@drawable/aussiebbq"/>
             </LinearLayout>
 
@@ -96,7 +96,7 @@
                 <ImageButton
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:id="@+id/imageButton31"
+                    android:id="@+id/itailian"
                     android:src="@drawable/itailian"/>
             </LinearLayout>
         </LinearLayout>
