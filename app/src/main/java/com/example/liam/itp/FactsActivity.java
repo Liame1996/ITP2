@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class FactsActivity extends AppCompatActivity {
+    private TextView TitleV, IngredientsV, DescriptionV, FactV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,11 @@ public class FactsActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        TitleV = (TextView)findViewById(R.id.titleID);
+        IngredientsV = (TextView)findViewById(R.id.ingredientsID);
+        DescriptionV = (TextView)findViewById(R.id.descriptionID);
+        FactV = (TextView)findViewById(R.id.factID);
 
 
 
@@ -66,5 +73,12 @@ public class FactsActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void display(String name, String type, String address, String email, String phone){
+        TitleV.setText(name);
+        IngredientsV.setText(type);
+        DescriptionV.setText(address);
+        FactV.setText(email);
     }
 }

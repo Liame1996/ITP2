@@ -29,10 +29,19 @@
                 >
 
                 <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Title:"
+                    android:id="@+id/textView19"
+                    android:textSize="30dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#c52727" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/textView12"
+                    android:id="@+id/titleID"
                     android:layout_gravity="center_horizontal"
                     android:textSize="30dp"
                     android:textColor="#c52727"
@@ -56,57 +65,64 @@
             android:weightSum="1">
 
             <TextView
-                android:layout_width="207dp"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Ingrediants"
+                android:text="Ingredients"
                 android:id="@+id/textView3"
-                android:layout_gravity="center_horizontal"
                 android:textSize="30dp"
                 android:textColor="#c52727"
-                android:paddingBottom="10dp" />
+                android:paddingBottom="10dp"
+                android:textAlignment="center" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/textView8"
-                android:layout_gravity="center_horizontal" />
+                android:id="@+id/ingredientsID"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center" />
 
             <TextView
-                android:layout_width="207dp"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="How to make:"
+                android:text="Description:"
                 android:id="@+id/textView2"
                 android:layout_gravity="center_horizontal|left"
                 android:textSize="30dp"
                 android:textColor="#c52727"
-                android:paddingTop="10dp" />
+                android:paddingTop="10dp"
+                android:textAlignment="center" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/textView9" />
+                android:id="@+id/descriptionID"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center" />
 
             <TextView
-                android:layout_width="207dp"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="History:"
+                android:text="Fact:"
                 android:id="@+id/textView"
                 android:layout_gravity="center_horizontal|left"
                 android:textSize="30dp"
                 android:textColor="#c52727"
-                android:paddingTop="10dp" />
+                android:paddingTop="10dp"
+                android:textAlignment="center" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/textView10"
-                android:textColor="#f92222" />
+                android:id="@+id/factID"
+                android:textColor="#f92222"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center" />
 
         </LinearLayout>
 

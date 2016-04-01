@@ -186,7 +186,6 @@ public class DisplayActivity extends AppCompatActivity {
         addressV.setText(address);
         emailV.setText(email);
         phoneV.setText(phone);
-
     }
 
     @SuppressLint("SimpleDateFormat")
