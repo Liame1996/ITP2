@@ -104,8 +104,8 @@ public class DBHelper {
         return temp;
     }
 
-    public ResultSet getClubDetails(){
-        String query = "SELECT * FROM club";
+    public ResultSet getDiceysDetails(){
+        String query = "SELECT * FROM club WHERE C_NAME = 'Diceys'";
         ResultSet temp = null;
 
         try{
@@ -120,8 +120,8 @@ public class DBHelper {
         return temp;
     }
 
-    public ResultSet getBarDetails(){
-        String query = "SELECT * FROM bar";
+    public ResultSet getPalaceDetails(){
+        String query = "SELECT * FROM club WHERE C_NAME = 'Palace'";
         ResultSet temp = null;
 
         try{
@@ -136,8 +136,8 @@ public class DBHelper {
         return temp;
     }
 
-    public ResultSet getRestaurantDetails(){
-        String query = "SELECT * FROM restaurant";
+    public ResultSet getEverleighDetails(){
+        String query = "SELECT * FROM club WHERE C_NAME = 'Everleigh'";
         ResultSet temp = null;
 
         try{
@@ -151,6 +151,200 @@ public class DBHelper {
         }
         return temp;
     }
+
+    public ResultSet getDtwoDetails(){
+        String query = "SELECT * FROM club WHERE C_NAME = 'DTwo'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getCoppersDetails(){
+        String query = "SELECT * FROM club WHERE C_NAME = 'Copper Face Jacks'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getSinnottsDetails(){
+        String query = "SELECT * FROM bar WHERE B_NAME = 'Sinnotts'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getOreillysDetails(){
+        String query = "SELECT * FROM bar WHERE B_NAME = 'OReilys'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getTrinityDetails(){
+        String query = "SELECT * FROM bar WHERE B_NAME = 'Trinity Bar'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getLagoonaDetails(){
+        String query = "SELECT * FROM bar WHERE B_NAME = 'Lagoona'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getTempleDetails(){
+        String query = "SELECT * FROM bar WHERE B_NAME = 'The Temple Bar'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getCaptainsDetails(){
+        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Captain Americas'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getTgifDetails(){
+        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Captain Americas'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getCounterDetails(){
+        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Captain Americas'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getAussiebbgDetails(){
+        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Captain Americas'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+    public ResultSet getItalianDetails(){
+        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Captain Americas'";
+        ResultSet temp = null;
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            temp = rs;
+        }
+        catch(SQLException s){
+            Log.e(TAG, s.getMessage());
+        }
+        return temp;
+    }
+
+
 
     public ResultSet getWhiskeyDetails(){
         String query = "SELECT * FROM whiskey";

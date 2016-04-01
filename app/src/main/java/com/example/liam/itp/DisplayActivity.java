@@ -54,7 +54,41 @@ public class DisplayActivity extends AppCompatActivity {
         nextButton = (Button)findViewById(R.id.nextBtn);
         addButton = (Button)findViewById(R.id.addBtn);
 
-        //new getClubDetails().execute();
+
+
+        if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Diceys")){
+            new getDiceysDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Palace")){
+            new getPalaceDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Dtwo")){
+            new getDtwoDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Everleigh")){
+            new getEverleighDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Coppers")){
+            new getCoppersDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Sinnotts")){
+            new getSinnottsDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Oreillys")){
+            new getOreillysDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Trinity")){
+            new getTrinityDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Lagoona")){
+            new getLagoonaDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Temple")){
+            new getTempleDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Captains")){
+            new getCaptainsDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Tgif")){
+            new getTgifDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Counter")){
+            new getCounterDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Aussiebbq")){
+            new getAussiebbqDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Italian")){
+            new getItalianDetails().execute();
+        }
+
+
         initUI();
         countDownStart();
 
@@ -205,8 +239,8 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
-        //CLUB DETAILS
-        public class getClubDetails extends AsyncTask<Void, Void, Void> {
+        //DICEYS DETAILS
+        public class getDiceysDetails extends AsyncTask<Void, Void, Void> {
             private ProgressDialog pDialog;
 
             @Override
@@ -220,7 +254,7 @@ public class DisplayActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... params) {
                 DBHelper db = new DBHelper();
-                details = db.getClubDetails();
+                details = db.getDiceysDetails();
                 return null;
             }
 
@@ -251,10 +285,194 @@ public class DisplayActivity extends AppCompatActivity {
             }
         }
 
+    //PALACE DETAILS
+    public class getPalaceDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            pDialog = new ProgressDialog(DisplayActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getPalaceDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r) {
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("C_NAME"), details.getString("CATEG"), details.getString("ADDRESS"), details.getString("EMAIL"), details.getString("PHONE") + "");
+                } else {
+                    ShowMessage("No details found");
+                }
+            } catch (SQLException s) {
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog() {
+            if (pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //EVERLEIGH DETAILS
+    public class getEverleighDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            pDialog = new ProgressDialog(DisplayActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getEverleighDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r) {
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("C_NAME"), details.getString("CATEG"), details.getString("ADDRESS"), details.getString("EMAIL"), details.getString("PHONE") + "");
+                } else {
+                    ShowMessage("No details found");
+                }
+            } catch (SQLException s) {
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog() {
+            if (pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //DTWO DETAILS
+    public class getDtwoDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            pDialog = new ProgressDialog(DisplayActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getDtwoDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r) {
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("C_NAME"), details.getString("CATEG"), details.getString("ADDRESS"), details.getString("EMAIL"), details.getString("PHONE") + "");
+                } else {
+                    ShowMessage("No details found");
+                }
+            } catch (SQLException s) {
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog() {
+            if (pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //COPPERS DETAILS
+    public class getCoppersDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            pDialog = new ProgressDialog(DisplayActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getCoppersDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r) {
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("C_NAME"), details.getString("CATEG"), details.getString("ADDRESS"), details.getString("EMAIL"), details.getString("PHONE") + "");
+                } else {
+                    ShowMessage("No details found");
+                }
+            } catch (SQLException s) {
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog() {
+            if (pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+        }
+    }
 
 
-    //BAR DETAILS
-    private class getBarDetails extends AsyncTask<Void, Void, Void> {
+
+    //SINNOTTS DETAILS
+    private class getSinnottsDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
 
         @Override
@@ -268,7 +486,7 @@ public class DisplayActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             DBHelper db = new DBHelper();
-            details = db.getClubDetails();
+            details = db.getSinnottsDetails();
             return null;
         }
 
@@ -301,8 +519,8 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
-    //RESTAURANT DETAILS
-    private class getRestaurantDetails extends AsyncTask<Void, Void, Void> {
+    //OREILLYS DETAILS
+    private class getOreillysDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
 
         @Override
@@ -316,7 +534,199 @@ public class DisplayActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             DBHelper db = new DBHelper();
-            details = db.getClubDetails();
+            details = db.getOreillysDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("B_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
+                }
+                else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //TRINITY BAR DETAILS
+    private class getTrinityDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(DisplayActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getTrinityDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("B_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
+                }
+                else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //LAGOONA DETAILS
+    private class getLagoonaDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(DisplayActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getLagoonaDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("B_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
+                }
+                else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //TEMPLE BAR DETAILS
+    private class getTempleDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(DisplayActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getTempleDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("B_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
+                }
+                else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //CAPTAINS DETAILS
+    private class getCaptainsDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(DisplayActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getCaptainsDetails();
             return null;
         }
 
@@ -349,8 +759,8 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
-    //WHISKEY DETAILS
-    private class getWhiskeyDetails extends AsyncTask<Void, Void, Void> {
+    //TGIF DETAILS
+    private class getTgifDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
 
         @Override
@@ -364,7 +774,7 @@ public class DisplayActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             DBHelper db = new DBHelper();
-            details = db.getClubDetails();
+            details = db.getTgifDetails();
             return null;
         }
 
@@ -373,7 +783,7 @@ public class DisplayActivity extends AppCompatActivity {
             hideDialog();
             try {
                 if (details != null && details.next()) {
-                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                    display(details.getString("R_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
                 }
                 else{
                     ShowMessage("No details found");
@@ -397,8 +807,8 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
-    //VODKA DETAILS
-    private class getVodkaDetails extends AsyncTask<Void, Void, Void> {
+    //COUNTER DETAILS
+    private class getCounterDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
 
         @Override
@@ -412,7 +822,7 @@ public class DisplayActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             DBHelper db = new DBHelper();
-            details = db.getClubDetails();
+            details = db.getCounterDetails();
             return null;
         }
 
@@ -421,7 +831,7 @@ public class DisplayActivity extends AppCompatActivity {
             hideDialog();
             try {
                 if (details != null && details.next()) {
-                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                    display(details.getString("R_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
                 }
                 else{
                     ShowMessage("No details found");
@@ -445,8 +855,8 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
-    //BRANDY DETAILS
-    private class getBrandyDetails extends AsyncTask<Void, Void, Void> {
+    //AUSSIEBBQ DETAILS
+    private class getAussiebbqDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
 
         @Override
@@ -460,7 +870,7 @@ public class DisplayActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             DBHelper db = new DBHelper();
-            details = db.getClubDetails();
+            details = db.getAussiebbgDetails();
             return null;
         }
 
@@ -469,7 +879,7 @@ public class DisplayActivity extends AppCompatActivity {
             hideDialog();
             try {
                 if (details != null && details.next()) {
-                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                    display(details.getString("R_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
                 }
                 else{
                     ShowMessage("No details found");
@@ -493,8 +903,8 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
-    //RUM DETAILS
-    private class getRumDetails extends AsyncTask<Void, Void, Void> {
+    //ITALIAN DETAILS
+    private class getItalianDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
 
         @Override
@@ -508,7 +918,7 @@ public class DisplayActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             DBHelper db = new DBHelper();
-            details = db.getClubDetails();
+            details = db.getItalianDetails();
             return null;
         }
 
@@ -517,7 +927,7 @@ public class DisplayActivity extends AppCompatActivity {
             hideDialog();
             try {
                 if (details != null && details.next()) {
-                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                    display(details.getString("R_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
                 }
                 else{
                     ShowMessage("No details found");
@@ -541,197 +951,389 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
-    //TEQUILA DETAILS
-    private class getTequilaDetails extends AsyncTask<Void, Void, Void> {
-        private ProgressDialog pDialog;
-
-        @Override
-        protected void onPreExecute(){
-            pDialog = new ProgressDialog(DisplayActivity.this);
-            pDialog.setCancelable(false);
-            pDialog.setMessage("Getting details...");
-            showDialog();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            DBHelper db = new DBHelper();
-            details = db.getClubDetails();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void r){
-            hideDialog();
-            try {
-                if (details != null && details.next()) {
-                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-                }
-                else{
-                    ShowMessage("No details found");
-                }
-            }
-            catch(SQLException s){
-                Log.e("Erro", s.getMessage());
-            }
-        }
-
-        private void showDialog() {
-            if (!pDialog.isShowing()) {
-                pDialog.show();
-            }
-        }
-
-        private void hideDialog(){
-            if(pDialog.isShowing()){
-                pDialog.dismiss();
-            }
-        }
-    }
-
-    //GIN DETAILS
-    private class getGinDetails extends AsyncTask<Void, Void, Void> {
-        private ProgressDialog pDialog;
-
-        @Override
-        protected void onPreExecute(){
-            pDialog = new ProgressDialog(DisplayActivity.this);
-            pDialog.setCancelable(false);
-            pDialog.setMessage("Getting details...");
-            showDialog();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            DBHelper db = new DBHelper();
-            details = db.getClubDetails();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void r){
-            hideDialog();
-            try {
-                if (details != null && details.next()) {
-                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-                }
-                else{
-                    ShowMessage("No details found");
-                }
-            }
-            catch(SQLException s){
-                Log.e("Erro", s.getMessage());
-            }
-        }
-
-        private void showDialog() {
-            if (!pDialog.isShowing()) {
-                pDialog.show();
-            }
-        }
-
-        private void hideDialog(){
-            if(pDialog.isShowing()){
-                pDialog.dismiss();
-            }
-        }
-    }
-
-    //BEER DETAILS
-    private class getBeerDetails extends AsyncTask<Void, Void, Void> {
-        private ProgressDialog pDialog;
-
-        @Override
-        protected void onPreExecute(){
-            pDialog = new ProgressDialog(DisplayActivity.this);
-            pDialog.setCancelable(false);
-            pDialog.setMessage("Getting details...");
-            showDialog();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            DBHelper db = new DBHelper();
-            details = db.getClubDetails();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void r){
-            hideDialog();
-            try {
-                if (details != null && details.next()) {
-                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-                }
-                else{
-                    ShowMessage("No details found");
-                }
-            }
-            catch(SQLException s){
-                Log.e("Erro", s.getMessage());
-            }
-        }
-
-        private void showDialog() {
-            if (!pDialog.isShowing()) {
-                pDialog.show();
-            }
-        }
-
-        private void hideDialog(){
-            if(pDialog.isShowing()){
-                pDialog.dismiss();
-            }
-        }
-    }
-
-    //CIDER DETAILS
-    private class getCiderDetails extends AsyncTask<Void, Void, Void> {
-        private ProgressDialog pDialog;
-
-        @Override
-        protected void onPreExecute(){
-            pDialog = new ProgressDialog(DisplayActivity.this);
-            pDialog.setCancelable(false);
-            pDialog.setMessage("Getting details...");
-            showDialog();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            DBHelper db = new DBHelper();
-            details = db.getClubDetails();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void r){
-            hideDialog();
-            try {
-                if (details != null && details.next()) {
-                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-                }
-                else{
-                    ShowMessage("No details found");
-                }
-            }
-            catch(SQLException s){
-                Log.e("Erro", s.getMessage());
-            }
-        }
-
-        private void showDialog() {
-            if (!pDialog.isShowing()) {
-                pDialog.show();
-            }
-        }
-
-        private void hideDialog(){
-            if(pDialog.isShowing()){
-                pDialog.dismiss();
-            }
-        }
-    }
+//    //WHISKEY DETAILS
+//    private class getWhiskeyDetails extends AsyncTask<Void, Void, Void> {
+//        private ProgressDialog pDialog;
+//
+//        @Override
+//        protected void onPreExecute(){
+//            pDialog = new ProgressDialog(DisplayActivity.this);
+//            pDialog.setCancelable(false);
+//            pDialog.setMessage("Getting details...");
+//            showDialog();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            DBHelper db = new DBHelper();
+//            details = db.getBarDetails();
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void r){
+//            hideDialog();
+//            try {
+//                if (details != null && details.next()) {
+//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+//                }
+//                else{
+//                    ShowMessage("No details found");
+//                }
+//            }
+//            catch(SQLException s){
+//                Log.e("Erro", s.getMessage());
+//            }
+//        }
+//
+//        private void showDialog() {
+//            if (!pDialog.isShowing()) {
+//                pDialog.show();
+//            }
+//        }
+//
+//        private void hideDialog(){
+//            if(pDialog.isShowing()){
+//                pDialog.dismiss();
+//            }
+//        }
+//    }
+//
+//    //VODKA DETAILS
+//    private class getVodkaDetails extends AsyncTask<Void, Void, Void> {
+//        private ProgressDialog pDialog;
+//
+//        @Override
+//        protected void onPreExecute(){
+//            pDialog = new ProgressDialog(DisplayActivity.this);
+//            pDialog.setCancelable(false);
+//            pDialog.setMessage("Getting details...");
+//            showDialog();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            DBHelper db = new DBHelper();
+//            details = db.getBarDetails();
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void r){
+//            hideDialog();
+//            try {
+//                if (details != null && details.next()) {
+//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+//                }
+//                else{
+//                    ShowMessage("No details found");
+//                }
+//            }
+//            catch(SQLException s){
+//                Log.e("Erro", s.getMessage());
+//            }
+//        }
+//
+//        private void showDialog() {
+//            if (!pDialog.isShowing()) {
+//                pDialog.show();
+//            }
+//        }
+//
+//        private void hideDialog(){
+//            if(pDialog.isShowing()){
+//                pDialog.dismiss();
+//            }
+//        }
+//    }
+//
+//    //BRANDY DETAILS
+//    private class getBrandyDetails extends AsyncTask<Void, Void, Void> {
+//        private ProgressDialog pDialog;
+//
+//        @Override
+//        protected void onPreExecute(){
+//            pDialog = new ProgressDialog(DisplayActivity.this);
+//            pDialog.setCancelable(false);
+//            pDialog.setMessage("Getting details...");
+//            showDialog();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            DBHelper db = new DBHelper();
+//            details = db.getBarDetails();
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void r){
+//            hideDialog();
+//            try {
+//                if (details != null && details.next()) {
+//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+//                }
+//                else{
+//                    ShowMessage("No details found");
+//                }
+//            }
+//            catch(SQLException s){
+//                Log.e("Erro", s.getMessage());
+//            }
+//        }
+//
+//        private void showDialog() {
+//            if (!pDialog.isShowing()) {
+//                pDialog.show();
+//            }
+//        }
+//
+//        private void hideDialog(){
+//            if(pDialog.isShowing()){
+//                pDialog.dismiss();
+//            }
+//        }
+//    }
+//
+//    //RUM DETAILS
+//    private class getRumDetails extends AsyncTask<Void, Void, Void> {
+//        private ProgressDialog pDialog;
+//
+//        @Override
+//        protected void onPreExecute(){
+//            pDialog = new ProgressDialog(DisplayActivity.this);
+//            pDialog.setCancelable(false);
+//            pDialog.setMessage("Getting details...");
+//            showDialog();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            DBHelper db = new DBHelper();
+//            details = db.getBarDetails();
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void r){
+//            hideDialog();
+//            try {
+//                if (details != null && details.next()) {
+//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+//                }
+//                else{
+//                    ShowMessage("No details found");
+//                }
+//            }
+//            catch(SQLException s){
+//                Log.e("Erro", s.getMessage());
+//            }
+//        }
+//
+//        private void showDialog() {
+//            if (!pDialog.isShowing()) {
+//                pDialog.show();
+//            }
+//        }
+//
+//        private void hideDialog(){
+//            if(pDialog.isShowing()){
+//                pDialog.dismiss();
+//            }
+//        }
+//    }
+//
+//    //TEQUILA DETAILS
+//    private class getTequilaDetails extends AsyncTask<Void, Void, Void> {
+//        private ProgressDialog pDialog;
+//
+//        @Override
+//        protected void onPreExecute(){
+//            pDialog = new ProgressDialog(DisplayActivity.this);
+//            pDialog.setCancelable(false);
+//            pDialog.setMessage("Getting details...");
+//            showDialog();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            DBHelper db = new DBHelper();
+//            details = db.getBarDetails();
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void r){
+//            hideDialog();
+//            try {
+//                if (details != null && details.next()) {
+//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+//                }
+//                else{
+//                    ShowMessage("No details found");
+//                }
+//            }
+//            catch(SQLException s){
+//                Log.e("Erro", s.getMessage());
+//            }
+//        }
+//
+//        private void showDialog() {
+//            if (!pDialog.isShowing()) {
+//                pDialog.show();
+//            }
+//        }
+//
+//        private void hideDialog(){
+//            if(pDialog.isShowing()){
+//                pDialog.dismiss();
+//            }
+//        }
+//    }
+//
+//    //GIN DETAILS
+//    private class getGinDetails extends AsyncTask<Void, Void, Void> {
+//        private ProgressDialog pDialog;
+//
+//        @Override
+//        protected void onPreExecute(){
+//            pDialog = new ProgressDialog(DisplayActivity.this);
+//            pDialog.setCancelable(false);
+//            pDialog.setMessage("Getting details...");
+//            showDialog();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            DBHelper db = new DBHelper();
+//            details = db.getBarDetails();
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void r){
+//            hideDialog();
+//            try {
+//                if (details != null && details.next()) {
+//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+//                }
+//                else{
+//                    ShowMessage("No details found");
+//                }
+//            }
+//            catch(SQLException s){
+//                Log.e("Erro", s.getMessage());
+//            }
+//        }
+//
+//        private void showDialog() {
+//            if (!pDialog.isShowing()) {
+//                pDialog.show();
+//            }
+//        }
+//
+//        private void hideDialog(){
+//            if(pDialog.isShowing()){
+//                pDialog.dismiss();
+//            }
+//        }
+//    }
+//
+//    //BEER DETAILS
+//    private class getBeerDetails extends AsyncTask<Void, Void, Void> {
+//        private ProgressDialog pDialog;
+//
+//        @Override
+//        protected void onPreExecute(){
+//            pDialog = new ProgressDialog(DisplayActivity.this);
+//            pDialog.setCancelable(false);
+//            pDialog.setMessage("Getting details...");
+//            showDialog();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            DBHelper db = new DBHelper();
+//            details = db.getBarDetails();
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void r){
+//            hideDialog();
+//            try {
+//                if (details != null && details.next()) {
+//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+//                }
+//                else{
+//                    ShowMessage("No details found");
+//                }
+//            }
+//            catch(SQLException s){
+//                Log.e("Erro", s.getMessage());
+//            }
+//        }
+//
+//        private void showDialog() {
+//            if (!pDialog.isShowing()) {
+//                pDialog.show();
+//            }
+//        }
+//
+//        private void hideDialog(){
+//            if(pDialog.isShowing()){
+//                pDialog.dismiss();
+//            }
+//        }
+//    }
+//
+//    //CIDER DETAILS
+//    private class getCiderDetails extends AsyncTask<Void, Void, Void> {
+//        private ProgressDialog pDialog;
+//
+//        @Override
+//        protected void onPreExecute(){
+//            pDialog = new ProgressDialog(DisplayActivity.this);
+//            pDialog.setCancelable(false);
+//            pDialog.setMessage("Getting details...");
+//            showDialog();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            DBHelper db = new DBHelper();
+//            details = db.getBarDetails();
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void r){
+//            hideDialog();
+//            try {
+//                if (details != null && details.next()) {
+//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+//                }
+//                else{
+//                    ShowMessage("No details found");
+//                }
+//            }
+//            catch(SQLException s){
+//                Log.e("Erro", s.getMessage());
+//            }
+//        }
+//
+//        private void showDialog() {
+//            if (!pDialog.isShowing()) {
+//                pDialog.show();
+//            }
+//        }
+//
+//        private void hideDialog(){
+//            if(pDialog.isShowing()){
+//                pDialog.dismiss();
+//            }
+//        }
+//    }
 
 
 

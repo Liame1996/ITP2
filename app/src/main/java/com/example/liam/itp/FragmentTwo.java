@@ -30,6 +30,7 @@ public class FragmentTwo extends Fragment{
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Sinnotts");
                 getActivity().startActivity(i);
             }
         });
@@ -38,6 +39,7 @@ public class FragmentTwo extends Fragment{
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Oreillys");
                 getActivity().startActivity(i);
             }
         });
@@ -46,6 +48,7 @@ public class FragmentTwo extends Fragment{
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Trinity");
                 getActivity().startActivity(i);
             }
         });
@@ -54,6 +57,7 @@ public class FragmentTwo extends Fragment{
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Lagoona");
                 getActivity().startActivity(i);
             }
         });
@@ -62,6 +66,7 @@ public class FragmentTwo extends Fragment{
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Temple");
                 getActivity().startActivity(i);
             }
         });

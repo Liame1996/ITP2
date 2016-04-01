@@ -30,6 +30,7 @@ public class FragmentThree extends Fragment {
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Captains");
                 getActivity().startActivity(i);
             }
         });
@@ -38,6 +39,7 @@ public class FragmentThree extends Fragment {
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Tgif");
                 getActivity().startActivity(i);
             }
         });
@@ -46,6 +48,7 @@ public class FragmentThree extends Fragment {
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Counter");
                 getActivity().startActivity(i);
             }
         });
@@ -54,6 +57,7 @@ public class FragmentThree extends Fragment {
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Aussiebbq");
                 getActivity().startActivity(i);
             }
         });
@@ -62,6 +66,7 @@ public class FragmentThree extends Fragment {
             @Override
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), DisplayActivity.class);
+                i.putExtra("Extra", "Italian");
                 getActivity().startActivity(i);
             }
         });
