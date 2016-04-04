@@ -50,9 +50,9 @@ public class DisplayActivity extends AppCompatActivity {
         emailV = (TextView)findViewById(R.id.emailID);
         phoneV = (TextView)findViewById(R.id.phoneID);
 
-        prevButton = (Button)findViewById(R.id.prevBtn);
-        nextButton = (Button)findViewById(R.id.nextBtn);
-        addButton = (Button)findViewById(R.id.addBtn);
+//        prevButton = (Button)findViewById(R.id.prevBtn);
+//        nextButton = (Button)findViewById(R.id.nextBtn);
+//        addButton = (Button)findViewById(R.id.addBtn);
 
 
 
@@ -94,41 +94,41 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
-        prevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (details != null && details.previous()) {
-                        display(details.getString("C_NAME"), details.getString("CATEG"), details.getString("ADDRESS"), details.getString("EMAIL"), details.getString("PHONE") + "");
-                    }
-                } catch (SQLException s) {
-                    Log.e("", s.getMessage());
-                }
-            }
-        });
-
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (details != null && details.next()) {
-                        display(details.getString("C_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
-                    }
-                }
-                catch(SQLException s){
-                    Log.e("", s.getMessage());
-                }
-            }
-        });
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(DisplayActivity.this, AddDetailActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+//        prevButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    if (details != null && details.previous()) {
+//                        display(details.getString("C_NAME"), details.getString("CATEG"), details.getString("ADDRESS"), details.getString("EMAIL"), details.getString("PHONE") + "");
+//                    }
+//                } catch (SQLException s) {
+//                    Log.e("", s.getMessage());
+//                }
+//            }
+//        });
+//
+//        nextButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    if (details != null && details.next()) {
+//                        display(details.getString("C_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
+//                    }
+//                }
+//                catch(SQLException s){
+//                    Log.e("", s.getMessage());
+//                }
+//            }
+//        });
+//
+//        addButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(DisplayActivity.this, AddDetailActivity.class);
+//                startActivity(i);
+//                finish();
+//            }
+//        });
 
 
     }

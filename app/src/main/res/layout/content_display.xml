@@ -361,41 +361,41 @@
                 android:id="@+id/mapLayout"
                 android:layout_gravity="center"></LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/buttonLayout">
+            <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:id="@+id/buttonLayout">-->
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Prev"
-                    android:id="@+id/prevBtn"
-                    android:layout_alignTop="@+id/nextBtn"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_weight="1" />
+                <!--<Button-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Prev"-->
+                    <!--android:id="@+id/prevBtn"-->
+                    <!--android:layout_alignTop="@+id/nextBtn"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_weight="1" />-->
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/addBtn"
-                    android:id="@+id/addBtn"
-                    android:layout_alignBottom="@+id/prevBtn"
-                    android:layout_centerHorizontal="true"
-                    android:layout_weight="1" />
+                <!--<Button-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/addBtn"-->
+                    <!--android:id="@+id/addBtn"-->
+                    <!--android:layout_alignBottom="@+id/prevBtn"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_weight="1" />-->
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Next"
-                    android:id="@+id/nextBtn"
-                    android:layout_below="@+id/phoneID"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_weight="1" />
-            </LinearLayout>
+                <!--<Button-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Next"-->
+                    <!--android:id="@+id/nextBtn"-->
+                    <!--android:layout_below="@+id/phoneID"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:layout_weight="1" />-->
+            <!--</LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 
