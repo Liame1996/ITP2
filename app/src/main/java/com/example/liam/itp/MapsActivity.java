@@ -286,7 +286,7 @@ public class MapsActivity extends AppCompatActivity{
         } */
 
         mMap.setMyLocationEnabled(true);
-       //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
+       mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
 
 
 
