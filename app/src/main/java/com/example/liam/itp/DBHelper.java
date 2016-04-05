@@ -281,7 +281,7 @@ public class DBHelper {
     }
 
     public ResultSet getTgifDetails(){
-        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Captain Americas'";
+        String query = "SELECT * FROM restaurant WHERE R_NAME = 'TGI FRIDAYS'";
         ResultSet temp = null;
 
         try{
@@ -297,7 +297,7 @@ public class DBHelper {
     }
 
     public ResultSet getCounterDetails(){
-        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Captain Americas'";
+        String query = "SELECT * FROM restaurant WHERE R_NAME = 'The Counter'";
         ResultSet temp = null;
 
         try{
@@ -313,7 +313,7 @@ public class DBHelper {
     }
 
     public ResultSet getAussiebbgDetails(){
-        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Captain Americas'";
+        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Aussie BBQ'";
         ResultSet temp = null;
 
         try{
@@ -329,7 +329,7 @@ public class DBHelper {
     }
 
     public ResultSet getItalianDetails(){
-        String query = "SELECT * FROM restaurant WHERE R_NAME = 'Captain Americas'";
+        String query = "SELECT * FROM restaurant WHERE R_NAME = 'The Italian Corner Restaurant'";
         ResultSet temp = null;
 
         try{
