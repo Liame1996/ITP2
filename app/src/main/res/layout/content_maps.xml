@@ -214,10 +214,10 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/mapHolder"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
             android:background="#9d222121">
 
 
@@ -227,11 +227,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 tools:context="com.example.liam.itp.MapsActivity"
-                android:layout_marginRight="2dp"
-                android:layout_marginBottom="2dp"
-                android:id="@+id/map"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp" />
+                android:id="@+id/map" />
 
 
 
