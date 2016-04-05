@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,8 @@ import java.sql.SQLException;
 
 public class FactsActivity extends AppCompatActivity {
     private TextView TitleV, IngredientsV, DescriptionV, FactV;
+    private Button prevButton, nextButton;
+
     private ResultSet details = null;
 
 
@@ -32,6 +36,10 @@ public class FactsActivity extends AppCompatActivity {
         IngredientsV = (TextView)findViewById(R.id.ingredientsID);
         DescriptionV = (TextView)findViewById(R.id.descriptionID);
         FactV = (TextView)findViewById(R.id.factID);
+
+
+        prevButton = (Button)findViewById(R.id.prevButton);
+        nextButton = (Button)findViewById(R.id.nextButton);
 
         if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Whiskey")){
             new getWhiskeyDetails().execute();
@@ -51,6 +59,33 @@ public class FactsActivity extends AppCompatActivity {
             new getCiderDetails().execute();
         }
 
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (details != null && details.previous()) {
+                        display(details.getString("Title"), details.getString("Ingredients"), details.getString("Description"), details.getString("Fact")+ "");
+                    }
+                } catch (SQLException s) {
+                    Log.e("", s.getMessage());
+                }
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (details != null && details.next()) {
+                        display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact")+"");
+                    }
+                }
+                catch(SQLException s){
+                    Log.e("", s.getMessage());
+                }
+            }
+        });
 
 
     }
