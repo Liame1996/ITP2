@@ -32,7 +32,7 @@
     <string name="facebook_app_id">1540718176222681</string>
 
     <string-array name="markerType">
-        <!-- IF ONE OF THESE IS SELECTED IT NARROWS THE DROPDOWN MENU BELOW AND SHOWING INLY MARKERS FROM SELECTED ON MAP -->
+        <!-- IF ONE OF THESE IS SELECTED IT NARROWS THE DROPDOWN MENU BELOW AND SHOWING ONLY MARKERS FROM SELECTED ON MAP -->
         <item> Bar/Club </item>
         <item> Pub </item>
         <item> Restaurant </item>
@@ -40,9 +40,10 @@
 
     <string-array name="markerPlaces">
         <!-- GET LIST OF PLACES FROM DATABASE -->
-        <item> Bar/Club </item>
-        <item> Pub </item>
-        <item> Restaurant </item>
+        <item> Marker 1 </item>
+        <item> Marker 2 </item>
+        <item> Marker 3 </item>
+        <item> Etc </item>
     </string-array>
     <string name="title_activity_facebook">FacebookActivity</string>
 </resources>

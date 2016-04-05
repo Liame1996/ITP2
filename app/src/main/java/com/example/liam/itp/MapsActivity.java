@@ -142,7 +142,7 @@ public class MapsActivity extends AppCompatActivity{
 
 
 
-    public void onZoom(View view){
+   /*  public void onZoom(View view){
         if(view.getId() == R.id.zoomIn){
             mMap.animateCamera(CameraUpdateFactory.zoomIn());
         }
@@ -160,7 +160,7 @@ public class MapsActivity extends AppCompatActivity{
         }  else {
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         }
-    }
+    } */
 
     private void setUpMapIfNeeded() {
         if (mMap == null) {
@@ -178,6 +178,8 @@ public class MapsActivity extends AppCompatActivity{
         /* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU */
 
         // Marker 1
+
+
 
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3405075, -6.2628862))
@@ -246,7 +248,7 @@ public class MapsActivity extends AppCompatActivity{
         }
 
         // Loading the map up to the current location
-      /*   LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
 
         Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
@@ -261,9 +263,9 @@ public class MapsActivity extends AppCompatActivity{
                 .tilt(40) // Sets the tilt of the camera to 30 degrees
                  .build(); // Creates a CameraPosition from the builder
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        } */
+        }
         mMap.setMyLocationEnabled(true);
-       mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
+       //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
 
 
 
