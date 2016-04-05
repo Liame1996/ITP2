@@ -1,19 +1,24 @@
 package com.example.liam.itp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class FactsActivity extends AppCompatActivity {
     private TextView TitleV, IngredientsV, DescriptionV, FactV;
+    private ResultSet details = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,24 @@ public class FactsActivity extends AppCompatActivity {
         IngredientsV = (TextView)findViewById(R.id.ingredientsID);
         DescriptionV = (TextView)findViewById(R.id.descriptionID);
         FactV = (TextView)findViewById(R.id.factID);
+
+        if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Whiskey")){
+            new getWhiskeyDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Vodka")){
+            new getVodkaDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Gin")){
+            new getGinDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Rum")){
+            new getRumDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Tequila")){
+            new getTequilaDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Brandy")){
+            new getBrandyDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Beer")){
+            new getBeerDetails().execute();
+        }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Cider")) {
+            new getCiderDetails().execute();
+        }
 
 
 
@@ -75,10 +98,394 @@ public class FactsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void display(String name, String type, String address, String email, String phone){
+    private void ShowMessage(String msg){
+        Toast.makeText(FactsActivity.this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    public void display(String name, String ingred, String desc, String fact){
         TitleV.setText(name);
-        IngredientsV.setText(type);
-        DescriptionV.setText(address);
-        FactV.setText(email);
+        IngredientsV.setText(ingred);
+        DescriptionV.setText(desc);
+        FactV.setText(fact);
+    }
+
+
+    //WHISKEY DETAILS
+    private class getWhiskeyDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(FactsActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getWhiskeyDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                } else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //VODKA DETAILS
+    private class getVodkaDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(FactsActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getVodkaDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                } else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //BRANDY DETAILS
+    private class getBrandyDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(FactsActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getBrandyDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                }
+                else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //RUM DETAILS
+    private class getRumDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(FactsActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getRumDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                } else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //TEQUILA DETAILS
+    private class getTequilaDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(FactsActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getTequilaDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                }
+                else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //GIN DETAILS
+    private class getGinDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(FactsActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getGinDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                } else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //BEER DETAILS
+    private class getBeerDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(FactsActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getBeerDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                } else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
+    }
+
+    //CIDER DETAILS
+    private class getCiderDetails extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute(){
+            pDialog = new ProgressDialog(FactsActivity.this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage("Getting details...");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            DBHelper db = new DBHelper();
+            details = db.getCiderDetails();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void r){
+            hideDialog();
+            try {
+                if (details != null && details.next()) {
+                    display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
+                }
+                else{
+                    ShowMessage("No details found");
+                }
+            }
+            catch(SQLException s){
+                Log.e("Erro", s.getMessage());
+            }
+        }
+
+        private void showDialog() {
+            if (!pDialog.isShowing()) {
+                pDialog.show();
+            }
+        }
+
+        private void hideDialog(){
+            if(pDialog.isShowing()){
+                pDialog.dismiss();
+            }
+        }
     }
 }
