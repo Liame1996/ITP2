@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_facts">
 
     <ScrollView
@@ -12,8 +17,19 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#0d1fc2">
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/image">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView4" />
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
@@ -24,11 +40,12 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:text="Title:"
+                android:text="Drink Name:"
                 android:id="@+id/textView19"
                 android:textSize="30dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#c52727" />
+                android:textColor="#c52727"
+                android:textAlignment="center" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,11 +57,6 @@
                 android:textColor="#c52727"
                 android:paddingBottom="10dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView2"
-                android:textAlignment="inherit" />
         </LinearLayout>
 
         <LinearLayout
@@ -58,7 +70,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Ingredients"
+                android:text="Ingredients:"
                 android:id="@+id/textView3"
                 android:textSize="30dp"
                 android:textColor="#c52727"
@@ -116,6 +128,35 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/buttons">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prev"
+                android:id="@+id/prevButton"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:id="@+id/nextButton"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+        </LinearLayout>
+
     </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>

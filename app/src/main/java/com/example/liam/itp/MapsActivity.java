@@ -9,7 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -28,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -40,6 +44,7 @@ public class MapsActivity extends AppCompatActivity{
     //implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
 
     // CODE TAKEN FROM TECH ACADEMY TUTORIAL
 
@@ -137,7 +142,7 @@ public class MapsActivity extends AppCompatActivity{
 
 
 
-    public void onZoom(View view){
+   /*  public void onZoom(View view){
         if(view.getId() == R.id.zoomIn){
             mMap.animateCamera(CameraUpdateFactory.zoomIn());
         }
@@ -155,7 +160,7 @@ public class MapsActivity extends AppCompatActivity{
         }  else {
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         }
-    }
+    } */
 
     private void setUpMapIfNeeded() {
         if (mMap == null) {
@@ -173,6 +178,8 @@ public class MapsActivity extends AppCompatActivity{
         /* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU */
 
         // Marker 1
+
+
 
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3405075, -6.2628862))
@@ -239,8 +246,26 @@ public class MapsActivity extends AppCompatActivity{
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
+        // Loading the map up to the current location
+         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+
+        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+            if (location != null)
+            {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
+
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(location.getLatitude(), location.getLongitude())) // Sets the center of the map to location user
+                .zoom(17) // Sets the zoom
+                .bearing(90) // Sets the orientation of the camera to east
+                .tilt(40) // Sets the tilt of the camera to 30 degrees
+                 .build(); // Creates a CameraPosition from the builder
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
         mMap.setMyLocationEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
+       //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
 
 
 
