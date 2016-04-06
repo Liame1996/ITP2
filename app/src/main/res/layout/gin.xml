@@ -22,7 +22,7 @@
                 android:id="@+id/textView4"
                 android:layout_gravity="center_horizontal"
                 android:textSize="50dp"
-                android:textColor="#ef730d"
+                android:textColor="#16f64a"
                 android:textAlignment="center"
                 android:paddingTop="30dp"
                 android:textStyle="bold" />

@@ -44,7 +44,6 @@
                 android:id="@+id/textView19"
                 android:textSize="30dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ef730d"
                 android:textStyle="bold"
                 android:textAlignment="center" />
 
@@ -73,8 +72,6 @@
                 android:text="Ingredients:"
                 android:id="@+id/textView3"
                 android:textSize="30dp"
-                android:textColor="#ef730d"
-                android:textStyle="bold"
                 android:paddingBottom="10dp"
                 android:textAlignment="center" />
 
@@ -94,8 +91,6 @@
                 android:id="@+id/textView2"
                 android:layout_gravity="center_horizontal|left"
                 android:textSize="30dp"
-                android:textColor="#ef730d"
-                android:textStyle="bold"
                 android:paddingTop="10dp"
                 android:textAlignment="center" />
 
@@ -115,8 +110,6 @@
                 android:id="@+id/textView"
                 android:layout_gravity="center_horizontal|left"
                 android:textSize="30dp"
-                android:textColor="#ef730d"
-                android:textStyle="bold"
                 android:paddingTop="10dp"
                 android:textAlignment="center" />
 

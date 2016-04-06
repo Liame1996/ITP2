@@ -95,13 +95,25 @@ public class MainAddDetailActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.addVenueBtn) {
-            Intent i = new Intent(this, MainAddDetailActivity.class);
+            Intent i = new Intent(this, AddDetailActivity.class);
             startActivity(i);
             finish();
             return true;
         }
         if (id == R.id.homeBtn) {
             Intent i = new Intent(this, itp2.class);
+            startActivity(i);
+            finish();
+            return true;
+        }
+        if (id == R.id.locationBtn) {
+            Intent i = new Intent(this, MapsActivity.class);
+            startActivity(i);
+            finish();
+            return true;
+        }
+        if (id == R.id.cocktailsBtn) {
+            Intent i = new Intent(this, CocktailScreen.class);
             startActivity(i);
             finish();
             return true;

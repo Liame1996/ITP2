@@ -77,7 +77,7 @@ public class AddDetailActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.addVenueBtn) {
-            Intent i = new Intent(this, DisplayActivity.class);
+            Intent i = new Intent(this, AddDetailActivity.class);
             startActivity(i);
             finish();
             return true;

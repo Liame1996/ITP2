@@ -63,9 +63,7 @@
                     android:layout_alignTop="@+id/nameID"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:textColor="#ef730d"
-                    android:textAlignment="center"
-                    android:textStyle="bold" />
+                    android:textAlignment="center" />
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -96,9 +94,7 @@
                     android:layout_alignRight="@+id/nameLabel"
                     android:layout_alignEnd="@+id/nameLabel"
                     android:layout_alignParentLeft="true"
-                    android:textColor="#ef730d"
-                    android:textAlignment="center"
-                    android:textStyle="bold" />
+                    android:textAlignment="center" />
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -129,9 +125,7 @@
                     android:layout_alignRight="@+id/typeLabel"
                     android:layout_alignEnd="@+id/typeLabel"
                     android:layout_alignParentLeft="true"
-                    android:textColor="#ef730d"
-                    android:textAlignment="center"
-                    android:textStyle="bold" />
+                    android:textAlignment="center"/>
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -161,9 +155,7 @@
                     android:layout_alignTop="@+id/emailID"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:textColor="#ef730d"
-                    android:textAlignment="center"
-                    android:textStyle="bold" />
+                    android:textAlignment="center" />
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -190,7 +182,6 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/phoneTV"
                     android:id="@+id/phoneLabel"
-                    android:textColor="#ef730d"
                     android:layout_alignTop="@+id/phoneID"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -224,10 +215,8 @@
                     android:text="@string/countdownTV"
                     android:id="@+id/countdownTV"
                     android:textAlignment="center"
-                    android:textColor="#ef730d"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_gravity="center"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center"/>
 
                 <LinearLayout
                     android:id="@+id/innerCountdownLayout"

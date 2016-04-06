@@ -122,7 +122,6 @@
                 android:text="Filter"
                 android:id="@+id/filterTV"
                 android:textSize="30sp"
-                android:textColor="#ef730d"
                 android:textStyle="bold"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
