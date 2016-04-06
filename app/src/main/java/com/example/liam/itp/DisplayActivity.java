@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,11 +25,13 @@ import com.example.liam.itp.DBHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class DisplayActivity extends AppCompatActivity {
 
-    private TextView nameV, typeV, addressV, emailV, phoneV, tvDay, tvHour, tvMinute, tvSecond;
+    private TextView nameV, typeV, addressV, emailV, phoneV, tvDay, tvHour, tvMinute, tvSecond, countTV;
     private Button prevButton, nextButton, addButton;
     private LinearLayout countdownLayout;
     private Handler handler;
@@ -49,6 +52,16 @@ public class DisplayActivity extends AppCompatActivity {
         addressV = (TextView)findViewById(R.id.addressID);
         emailV = (TextView)findViewById(R.id.emailID);
         phoneV = (TextView)findViewById(R.id.phoneID);
+        countTV = (TextView)findViewById(R.id.countTV);
+
+        countTV.setText("00:00:00");
+        //final countDown timerDiceys = new countDown(180000, 1000);
+        //final countDown timerPalace = new countDown(18000, 1000);
+
+        //timerDiceys.start();
+        //timerPalace.start();
+
+
 
 //        prevButton = (Button)findViewById(R.id.prevBtn);
 //        nextButton = (Button)findViewById(R.id.nextBtn);
@@ -58,6 +71,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Diceys")){
             new getDiceysDetails().execute();
+            diceysTimer();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Palace")){
             new getPalaceDetails().execute();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Dtwo")){
@@ -234,6 +248,48 @@ public class DisplayActivity extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable, 0);
+    }
+
+    public class countDown extends CountDownTimer{
+        public countDown(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            long millis = millisUntilFinished;
+            String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                    TimeUnit.MILLISECONDS.toMinutes(millis)-TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                    TimeUnit.MILLISECONDS.toSeconds(millis)-TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+            countTV.setText(hms);
+
+        }
+
+        @Override
+        public void onFinish() {
+            countTV.setText("00:00:00");
+        }
+    }
+
+    public void diceysTimer(){
+        Calendar cal = Calendar.getInstance();
+
+        final countDown timerDiceys = new countDown(37800000, 1000);
+        if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
+            timerDiceys.start();
+        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
+            timerDiceys.start();
+        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
+            timerDiceys.start();
+        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
+            timerDiceys.start();
+        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
+            timerDiceys.start();
+        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
+            timerDiceys.start();
+        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
+            timerDiceys.start();
+        }
     }
 
 
