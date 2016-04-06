@@ -1,12 +1,19 @@
 package com.example.liam.itp;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.Time;
@@ -21,6 +28,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liam.itp.DBHelper;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -1392,4 +1405,119 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
+
+    // ******** FOR MAP ************ - CM
+    private GoogleMap mMap;
+
+
+    // CODE TAKEN FROM TECH ACADEMY TUTORIAL
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpMapIfNeeded();
+    }
+
+
+    private void setUpMapIfNeeded() {
+        if (mMap == null) {
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+            if (mMap != null) {
+                setUpMap();
+            }
+        }
+
+    }
+
+    public void setUpMap() {
+
+        /* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU */
+
+        // Marker 1
+
+
+
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.3405075, -6.2628862))
+                .title("Captain America's")
+                .snippet("44 Grafton St, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+
+
+
+        //Marker 2
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.3469988, -6.2563745))
+                .title("O'Reillys")
+                .snippet("2 Poolbeg St, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+
+
+        //Marker 3
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.335940, -6.265624))
+                .title("The Palace")
+                .snippet("84-87 Camden Street Lower, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+
+        // Marker 4
+
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.3397012, -6.2634227))
+                .title("Tgi Friday's")
+                .snippet("St Stephen's Green, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+
+
+        //Marker 5
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.340136, -6.2637727))
+                .title("Sinnotts")
+                .snippet("South King Street, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+
+        //Marker 6
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.335719, -6.263619))
+                .title("Dicey's Garden")
+                .snippet("21-25 Harcourt St, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+
+
+
+        // Getting more information for infowindow
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+
+
+
+
+        mMap.setMyLocationEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 13.0f));
+
+
+
+    }
+
+
+
 }
+
+

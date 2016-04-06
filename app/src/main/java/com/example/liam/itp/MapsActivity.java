@@ -43,13 +43,12 @@ public class MapsActivity extends AppCompatActivity{
     //implements GoogleMap.InfoWindowAdapter{
     //implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+
+        private GoogleMap mMap;
 
 
-    // CODE TAKEN FROM TECH ACADEMY TUTORIAL
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+        @Override
+        protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
@@ -59,15 +58,15 @@ public class MapsActivity extends AppCompatActivity{
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_itp2, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -103,8 +102,8 @@ public class MapsActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
+        @Override
+        protected void onResume () {
         super.onResume();
         setUpMapIfNeeded();
     }
@@ -179,23 +178,24 @@ public class MapsActivity extends AppCompatActivity{
 
         // Marker 1
 
-
-
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3405075, -6.2628862))
                 .title("Captain America's")
-                .snippet("44 Grafton St, Dublin 2")
+                .snippet("44 Grafton St, Dublin 2" + "\n" +
+                        "Hours: 12:00 - 22:00")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-        //  mMap.setInfoWindowAdapter(this);
+
 
 
         //Marker 2
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3469988, -6.2563745))
                 .title("O'Reillys")
-                .snippet("2 Poolbeg St, Dublin 2")
+                .snippet("2 Poolbeg St, Dublin 2" + "\n" +
+                        "Hours(WEnd): 16(17):00 - 23(3)0:0")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-        //  mMap.setInfoWindowAdapter(this);
+       //  mMap.setInfoWindowAdapter(new InfoWindowOptions()
+
 
 
         //Marker 3
@@ -231,6 +231,68 @@ public class MapsActivity extends AppCompatActivity{
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
         // mMap.setInfoWindowAdapter(this);
 
+        //Marker 7
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.334425, -6.262743))
+                .title("DTwo")
+                .snippet("60 Harcourt St, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+        //Marker 8
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.335181, -6.263543))
+                .title("Everleigh Garden's")
+                .snippet("33 Harcourt St, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+        //Marker 9
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.335377, -6.263599))
+                .title("Copper Face Jack's")
+                .snippet("29-30 Harcourt St, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+        //Marker 10
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.3404330, -6.263613))
+                .title("Trinity Bar")
+                .snippet("46-47 Dame St")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+        //Marker 11
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.349617, -6.243003))
+                .title("Lagoona")
+                .snippet("Unit 4, Custom House Square, Mayor St Lower, Dublin 1")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+        //Marker 12
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.345475, -6.264189))
+                .title("CThe Temple Bar")
+                .snippet("247-48 Temple Bar, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+        //Marker 13
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.343368, -6.260031))
+                .title("The Counter")
+                .snippet("20 Suffolk St, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+
+        //Marker 14
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.331180, -6.264750))
+                .title("Aussie BBQ")
+                .snippet("45 South Richmond St, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+
+        //Marker 15
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(53.345644, -6.264745))
+                .title("The Italian Corner Restaurant")
+                .snippet("23/24 Wellington Quay, Dublin 2")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
 
 
         // Getting more information for infowindow
@@ -248,46 +310,29 @@ public class MapsActivity extends AppCompatActivity{
         }
 
 
-
         // Loading the map up to the current location
-/*
+
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                    Criteria criteria = new Criteria();
+        Criteria criteria = new Criteria();
 
-                    Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-                    if (location != null)
-                    {
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                new LatLng(location.getLatitude(), location.getLongitude()), 13));
+        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+        if (location != null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                    new LatLng(location.getLatitude(), location.getLongitude()), 15));
 
-                        CameraPosition cameraPosition = new CameraPosition.Builder()
+                       /* CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                        .zoom(17)                   // Sets the zoom
-                        .bearing(30)                // Sets the orientation of the camera to east
+                        .zoom(9)                   // Sets the zoom
+                      //  .bearing(30)                // Sets the orientation of the camera to east
                         .tilt(40)                   // Sets the tilt of the camera to 30 degrees
                         .build();                   // Creates a CameraPosition from the builder
-                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                  //  mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+*/
+        }
 
-                    }
-
-
-
-        private void setUpMapIfNeeded() {
-            // Do a null check to confirm that we have not already instantiated the map.
-            if (mMap == null) {
-                // Try to obtain the map from the SupportMapFragment.
-                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                        .getMap();
-                // Check if we were successful in obtaining the map.
-                if (mMap != null) {
-                    setUpMap();
-                }
-            }
-        } */
 
         mMap.setMyLocationEnabled(true);
-       mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
-
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
 
 
     }
@@ -296,7 +341,7 @@ public class MapsActivity extends AppCompatActivity{
     // ****** Add on click from this video -> https://www.youtube.com/watch?v=xglNnK6xXYY to make window clickable to load to other page
 
 /*
-    // For info window implementaion
+     For info window implementaion
      @Override
     public View getInfoWindow(Marker marker) {
         //return null automatically given
@@ -311,3 +356,5 @@ public class MapsActivity extends AppCompatActivity{
         return null;
     } */
 }
+
+
