@@ -39,7 +39,6 @@ public class MainAddDetailActivity extends AppCompatActivity {
         phoneField = (EditText)findViewById(R.id.phoneET);
 
         addBtn = (Button)findViewById(R.id.addBtn);
-        displayBtn = (Button)findViewById(R.id.displayBtn);
         homeBtn = (ImageButton) findViewById(R.id.homeBtn);
 
         addBtn.setOnClickListener(new View.OnClickListener() {

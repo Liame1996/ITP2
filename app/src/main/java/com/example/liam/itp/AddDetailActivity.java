@@ -39,7 +39,6 @@ public class AddDetailActivity extends AppCompatActivity {
         phoneField = (EditText)findViewById(R.id.phoneET);
 
         addBtn = (Button)findViewById(R.id.addBtn);
-        displayBtn = (Button)findViewById(R.id.displayBtn);
         homeBtn = (ImageButton) findViewById(R.id.homeBtn);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -56,15 +55,6 @@ public class AddDetailActivity extends AppCompatActivity {
                     phoneField.setText(null);
 
                 }
-            }
-        });
-
-        displayBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AddDetailActivity.this, DisplayActivity.class);
-                startActivity(i);
-                finish();
             }
         });
 

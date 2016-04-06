@@ -22,9 +22,10 @@
                 android:id="@+id/textView4"
                 android:layout_gravity="center_horizontal"
                 android:textSize="50dp"
-                android:textColor="#c52727"
+                android:textColor="#ef730d"
                 android:textAlignment="center"
-                android:paddingTop="30dp" />
+                android:paddingTop="30dp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="fill_parent"

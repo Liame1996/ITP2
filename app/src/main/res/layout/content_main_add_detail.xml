@@ -10,8 +10,7 @@
     android:paddingTop="0dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AddDetailActivity"
-    tools:showIn="@layout/activity_main_add_detail"
-    android:background="@drawable/bg">
+    tools:showIn="@layout/activity_main_add_detail">
 
 
 
@@ -22,8 +21,7 @@
     android:layout_alignParentStart="false"
     android:layout_alignParentEnd="false"
     android:layout_alignParentTop="false"
-    android:layout_below="@id/navBar"
-    android:background="@drawable/border">
+    android:layout_below="@id/navBar">
 
     <LinearLayout
         android:orientation="vertical"
@@ -45,7 +43,8 @@
                 android:text="@string/enterDetailsTitle"
                 android:id="@+id/infoTV"
                 android:textSize="25sp"
-                android:textColor="#030303"
+                android:textColor="#ef730d"
+                android:textStyle="bold"
                 android:layout_marginBottom="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp" />
@@ -75,7 +74,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/venueNameTV"
                     android:id="@+id/nameTV"
-                    android:textColor="#f50202"
+                    android:textColor="#ef730d"
+                    android:textStyle="bold"
                     android:layout_marginRight="40dp"
                     android:layout_marginLeft="0dp" />
 
@@ -87,7 +87,9 @@
                     android:id="@+id/nameET"
                     android:hint="Enter name"
                     android:layout_gravity="right"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#ef730d"
+                    android:contextClickable="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -103,7 +105,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/typeTV"
                     android:id="@+id/typeTV"
-                    android:textColor="#e90b0b"
+                    android:textColor="#ef730d"
+                    android:textStyle="bold"
                     android:layout_marginRight="40dp"
                     android:layout_marginLeft="0dp"
                     android:textSize="18sp" />
@@ -120,7 +123,8 @@
                         android:id="@+id/type"
                         android:spinnerMode="dropdown"
                         android:entries="@array/type"
-                        android:layout_marginBottom="20dp" />
+                        android:layout_marginBottom="20dp"
+                        android:backgroundTint="#ef730d" />
 
                     <!--    <RadioButton
                            android:layout_width="fill_parent"
@@ -156,7 +160,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/addressTV"
                     android:id="@+id/addressTV"
-                    android:textColor="#f50202"
+                    android:textColor="#ef730d"
+                    android:textStyle="bold"
                     android:textSize="18sp" />
 
                 <EditText
@@ -168,7 +173,8 @@
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#ef730d" />
 
             </LinearLayout>
 
@@ -184,7 +190,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/emailTV"
                     android:id="@+id/emailTV"
-                    android:textColor="#e90b0b"
+                    android:textColor="#ef730d"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginTop="20dp" />
 
@@ -196,7 +203,8 @@
                     android:id="@+id/emailET"
                     android:hint="abc123@world.com"
                     android:layout_marginLeft="22dp"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#ef730d" />
             </LinearLayout>
 
             <LinearLayout
@@ -211,7 +219,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/phoneTV"
                     android:id="@+id/phoneTV"
-                    android:textColor="#e90b0b"
+                    android:textColor="#ef730d"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="20dp" />
@@ -223,7 +232,8 @@
                     android:ems="10"
                     android:id="@+id/phoneET"
                     android:hint="010000000"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#ef730d" />
             </LinearLayout>
 
             <LinearLayout
@@ -234,12 +244,6 @@
                 android:layout_weight="70"
                 android:clickable="true">
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/displayBtn"
-                    android:id="@+id/displayBtn" />
-
                 <Space
                     android:layout_width="200dp"
                     android:layout_height="fill_parent" />
@@ -249,7 +253,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/addBtn"
                     android:id="@+id/addBtn"
-                    android:layout_gravity="right" />
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginBottom="15dp" />
 
             </LinearLayout>
 

@@ -12,6 +12,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="EditTextCustomHolo" parent="android:Widget.EditText">
+        <item name="android:textColor">#d13dbb</item>
+    </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
