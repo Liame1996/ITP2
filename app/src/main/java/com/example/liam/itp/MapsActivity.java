@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.UiSettings;
 
 import java.io.IOException;
 import java.util.List;
@@ -47,6 +48,8 @@ public class MapsActivity extends AppCompatActivity{
         private GoogleMap mMap;
 
 
+
+    // For ToolBar
         @Override
         protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -181,8 +184,7 @@ public class MapsActivity extends AppCompatActivity{
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3405075, -6.2628862))
                 .title("Captain America's")
-                .snippet("44 Grafton St, Dublin 2" + "\n" +
-                        "Hours: 12:00 - 22:00")
+                .snippet("44 Grafton St, Dublin 2")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
 
 
@@ -191,8 +193,7 @@ public class MapsActivity extends AppCompatActivity{
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3469988, -6.2563745))
                 .title("O'Reillys")
-                .snippet("2 Poolbeg St, Dublin 2" + "\n" +
-                        "Hours(WEnd): 16(17):00 - 23(3)0:0")
+                .snippet("2 Poolbeg St, Dublin 2")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
        //  mMap.setInfoWindowAdapter(new InfoWindowOptions()
 
@@ -310,6 +311,7 @@ public class MapsActivity extends AppCompatActivity{
         }
 
 
+
         // Loading the map up to the current location
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -320,19 +322,31 @@ public class MapsActivity extends AppCompatActivity{
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                     new LatLng(location.getLatitude(), location.getLongitude()), 15));
 
-                       /* CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                        .zoom(9)                   // Sets the zoom
+                       CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(location.getLatitude(), location.getLongitude()))     // Sets the center of the map to location user
+                       .zoom(15)                   // Sets the zoom
                       //  .bearing(30)                // Sets the orientation of the camera to east
-                        .tilt(40)                   // Sets the tilt of the camera to 30 degrees
-                        .build();                   // Creates a CameraPosition from the builder
-                  //  mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-*/
+                       // .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                       .build();                   // Creates a CameraPosition from the builder
+
+                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
         }
 
 
         mMap.setMyLocationEnabled(true);
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
+
+
+        // FOR CONTROLS ON THE MAP ITSELF
+        UiSettings settings = mMap.getUiSettings();
+        settings.setCompassEnabled( true );
+        settings.setRotateGesturesEnabled( true );
+        settings.setScrollGesturesEnabled( true );
+        settings.setTiltGesturesEnabled( true );
+        settings.setZoomControlsEnabled( true);
+        settings.setZoomGesturesEnabled( true );
+        settings.setMapToolbarEnabled(true);
 
 
     }

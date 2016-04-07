@@ -1509,8 +1509,8 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
-        mMap.setMyLocationEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 13.0f));
+       // mMap.setMyLocationEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 15.0f));
 
 
 
