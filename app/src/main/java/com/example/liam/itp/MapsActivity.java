@@ -48,13 +48,10 @@ public class MapsActivity extends AppCompatActivity {
         //implements GoogleMap.InfoWindowAdapter{
     //implements OnMapReadyCallback {
 
-   // private TextView mName, mAddress, mHours;
-
-
         private GoogleMap mMap;
 
 
-    // For ToolBar
+    // *** For ToolBar ***
         @Override
         protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -69,7 +66,7 @@ public class MapsActivity extends AppCompatActivity {
     }
 
 
-    // For Toolbar
+    // *** For Toolbar ***
         @Override
      public boolean onCreateOptionsMenu (Menu menu){
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -164,7 +161,7 @@ public class MapsActivity extends AppCompatActivity {
 
 
 
-    //CHANGE MAP TYPE
+    // *** CHANGE MAP TYPE ***
     public void changeType (View view){
         if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL){
             mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
@@ -184,7 +181,7 @@ public class MapsActivity extends AppCompatActivity {
                 setUpMap();
 
 
-                // Code for infowindow
+                // *** Code for infowindow ***
                 // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
                 mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                     @Override
@@ -204,9 +201,19 @@ public class MapsActivity extends AppCompatActivity {
 
                         tvName.setText(marker.getTitle());
                         tvAddress.setText(marker.getSnippet());
-                        tvHours.setText(marker.getSnippet());
+                       // tvHours.setText(marker.getSnippet());
 
                         return v;
+                    }
+                });
+
+                // *** For a new activity to open when info window is clicked ***
+
+                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(Marker marker) {
+                        Intent intent = new Intent(MapsActivity.this, itp2.class);
+                        startActivity(intent);
                     }
                 });
             }
@@ -229,7 +236,7 @@ public class MapsActivity extends AppCompatActivity {
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
 
 
-/*
+
         //Marker 2
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3469988, -6.2563745))
@@ -334,10 +341,10 @@ public class MapsActivity extends AppCompatActivity {
                 .position(new LatLng(53.345644, -6.264745))
                 .title("The Italian Corner Restaurant")
                 .snippet("23/24 Wellington Quay, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery))); */
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
 
 
-        // Getting more information for infowindow
+
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -353,7 +360,7 @@ public class MapsActivity extends AppCompatActivity {
 
 
 
-        // Loading the map up to the current location
+        // *** Loading the map up to the current location ***
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -370,7 +377,7 @@ public class MapsActivity extends AppCompatActivity {
                        // .tilt(40)                   // Sets the tilt of the camera to 30 degrees
                        .build();                   // Creates a CameraPosition from the builder
 
-                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
         }
 
@@ -379,7 +386,7 @@ public class MapsActivity extends AppCompatActivity {
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
 
 
-        // FOR CONTROLS ON THE MAP ITSELF
+        // *** FOR CONTROLS ON THE MAP ITSELF ***
         UiSettings settings = mMap.getUiSettings();
         settings.setCompassEnabled(true);
         settings.setRotateGesturesEnabled(true);
@@ -391,13 +398,6 @@ public class MapsActivity extends AppCompatActivity {
 
 
     }
-
-
-    // ****** Add on click from this video -> https://www.youtube.com/watch?v=xglNnK6xXYY to make window clickable to load to other page
-
-
-
-
 }
 
 
