@@ -31,6 +31,7 @@ import com.example.liam.itp.DBHelper;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -1508,6 +1509,16 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
+
+        // FOR CONTROLS ON THE MAP ITSELF
+        UiSettings settings = mMap.getUiSettings();
+        settings.setCompassEnabled( true );
+        settings.setRotateGesturesEnabled( true );
+        settings.setScrollGesturesEnabled( true );
+        settings.setTiltGesturesEnabled( true );
+        settings.setZoomControlsEnabled( true);
+        settings.setZoomGesturesEnabled( true );
+        settings.setMapToolbarEnabled(true);
 
        // mMap.setMyLocationEnabled(true);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 15.0f));

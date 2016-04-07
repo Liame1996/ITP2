@@ -5,7 +5,9 @@ package com.example.liam.itp;
 
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -23,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 // Code imported for zoom
@@ -33,6 +36,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.UiSettings;
 
@@ -40,13 +44,14 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class MapsActivity extends AppCompatActivity{
-    //implements GoogleMap.InfoWindowAdapter{
+public class MapsActivity extends AppCompatActivity {
+        //implements GoogleMap.InfoWindowAdapter{
     //implements OnMapReadyCallback {
+
+   // private TextView mName, mAddress, mHours;
 
 
         private GoogleMap mMap;
-
 
 
     // For ToolBar
@@ -59,10 +64,14 @@ public class MapsActivity extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
     }
 
+
+    // For Toolbar
         @Override
-        public boolean onCreateOptionsMenu (Menu menu){
+     public boolean onCreateOptionsMenu (Menu menu){
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_itp2, menu);
         return true;
@@ -151,8 +160,11 @@ public class MapsActivity extends AppCompatActivity{
         if(view.getId()==R.id.zoomOut){
             mMap.animateCamera(CameraUpdateFactory.zoomOut());
         }
-    }
+    }*/
 
+
+
+    //CHANGE MAP TYPE
     public void changeType (View view){
         if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL){
             mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
@@ -162,7 +174,7 @@ public class MapsActivity extends AppCompatActivity{
         }  else {
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         }
-    } */
+    }
 
     private void setUpMapIfNeeded() {
         if (mMap == null) {
@@ -170,6 +182,33 @@ public class MapsActivity extends AppCompatActivity{
 
             if (mMap != null) {
                 setUpMap();
+
+
+                // Code for infowindow
+                // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                    @Override
+                    public View getInfoWindow(Marker marker) {
+                        return null;
+                    }
+
+                    @Override
+                    public View getInfoContents(Marker marker) {
+
+                    View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                        TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                        TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                        TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                       // LatLng ll = marker.getPosition();
+
+                        tvName.setText(marker.getTitle());
+                        tvAddress.setText(marker.getSnippet());
+                        tvHours.setText(marker.getSnippet());
+
+                        return v;
+                    }
+                });
             }
         }
 
@@ -177,18 +216,20 @@ public class MapsActivity extends AppCompatActivity{
 
     public void setUpMap() {
 
+
+
         /* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU */
 
-        // Marker 1
+       // Marker 1
 
-        mMap.addMarker(new MarkerOptions()
+                 mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3405075, -6.2628862))
                 .title("Captain America's")
                 .snippet("44 Grafton St, Dublin 2")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
 
 
-
+/*
         //Marker 2
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.3469988, -6.2563745))
@@ -270,7 +311,7 @@ public class MapsActivity extends AppCompatActivity{
         //Marker 12
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(53.345475, -6.264189))
-                .title("CThe Temple Bar")
+                .title("The Temple Bar")
                 .snippet("247-48 Temple Bar, Dublin 2")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
 
@@ -293,7 +334,7 @@ public class MapsActivity extends AppCompatActivity{
                 .position(new LatLng(53.345644, -6.264745))
                 .title("The Italian Corner Restaurant")
                 .snippet("23/24 Wellington Quay, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery))); */
 
 
         // Getting more information for infowindow
@@ -340,12 +381,12 @@ public class MapsActivity extends AppCompatActivity{
 
         // FOR CONTROLS ON THE MAP ITSELF
         UiSettings settings = mMap.getUiSettings();
-        settings.setCompassEnabled( true );
-        settings.setRotateGesturesEnabled( true );
-        settings.setScrollGesturesEnabled( true );
-        settings.setTiltGesturesEnabled( true );
-        settings.setZoomControlsEnabled( true);
-        settings.setZoomGesturesEnabled( true );
+        settings.setCompassEnabled(true);
+        settings.setRotateGesturesEnabled(true);
+        settings.setScrollGesturesEnabled(true);
+        settings.setTiltGesturesEnabled(true);
+        settings.setZoomControlsEnabled(true);
+        settings.setZoomGesturesEnabled(true);
         settings.setMapToolbarEnabled(true);
 
 
@@ -354,21 +395,11 @@ public class MapsActivity extends AppCompatActivity{
 
     // ****** Add on click from this video -> https://www.youtube.com/watch?v=xglNnK6xXYY to make window clickable to load to other page
 
-/*
-     For info window implementaion
-     @Override
-    public View getInfoWindow(Marker marker) {
-        //return null automatically given
-        // Inflate view
-        // Will return everything in info_window.xml
-         View view = getLayoutInflater().inflate(R.layout.info_window, null, false);
-        return view;
-    }
 
-    @Override
-    public View getInfoContents(Marker marker) {
-        return null;
-    } */
+
+
 }
+
+
 
 
