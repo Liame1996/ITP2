@@ -414,7 +414,7 @@ public class DisplayActivity extends AppCompatActivity {
                 settings.setMapToolbarEnabled(true);
 
                 // Set camera to load up on diceys -CMalone
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335719, -6.263619), 15.0f));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335719, -6.263619), 17.0f));
 
             }
             private void showDialog() {
@@ -541,7 +541,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on the palace -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335940, -6.265624), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335940, -6.265624), 17.0f));
         }
     }
 
@@ -657,7 +657,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on Everleigh Gardens  -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335181, -6.263543), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335181, -6.263543), 17.0f));
         }
 
     }
@@ -775,7 +775,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on the D2 -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.334425, -6.262743), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.334425, -6.262743), 17.0f));
         }
     }
 
@@ -892,7 +892,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on Copper Face Jacks -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335377, -6.263599), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335377, -6.263599), 17.0f));
         }
     }
 
@@ -1011,7 +1011,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on Sinnotts -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.340136, -6.2637727), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.340136, -6.2637727), 17.0f));
         }
     }
 
@@ -1131,7 +1131,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on O'Reillys -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3469988, -6.2563745), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3469988, -6.2563745), 17.0f));
         }
     }
 
@@ -1250,7 +1250,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on Trinity Bar -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3404330, -6.263613), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3404330, -6.263613), 17.0f));
         }
     }
 
@@ -1368,7 +1368,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on Lagoona -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.349617, -6.243003), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.349617, -6.243003), 17.0f));
         }
     }
 
@@ -1487,7 +1487,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on the Temple Bar -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.345475, -6.264189), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.345475, -6.264189), 17.0f));
         }
     }
 
@@ -1607,7 +1607,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on the Captain Americas -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3405075, -6.2628862), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3405075, -6.2628862), 17.0f));
         }
     }
 
@@ -1726,7 +1726,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on TGIF -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3397012, -6.2634227), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3397012, -6.2634227), 17.0f));
         }
     }
 
@@ -1845,7 +1845,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on the Counter -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.343368, -6.260031), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.343368, -6.260031), 17.0f));
         }
     }
 
@@ -1964,7 +1964,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on the Aussie BBQ
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.331180, -6.264750), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.331180, -6.264750), 17.0f));
         }
     }
 
@@ -2085,7 +2085,7 @@ public class DisplayActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
             // Set camera to load up on the Italian Corner -CMalone
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.345644, -6.264745), 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.345644, -6.264745), 17.0f));
         }
     }
 
