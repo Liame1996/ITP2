@@ -336,7 +336,7 @@ public class DisplayActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Void r) {
-               // setUpMapIfNeeded();
+               setUpMapIfNeeded();
                 hideDialog();
                 try {
                     if (details != null && details.next()) {
@@ -352,13 +352,30 @@ public class DisplayActivity extends AppCompatActivity {
 
 
             // ** WAS TRYING TO JUST SHOW DICEYS MARKER, CAN'T FIND SUITABLE PLACE FOR IF STATEMENTS
-           /* private void setUpMapIfNeeded() {
+
+
+            // ******** FOR MAP ************ - CMalone
+            //private GoogleMap mMap;
+
+
+            // CODE TAKEN FROM TECH ACADEMY TUTORIAL
+
+
+
+           /*  @Override
+            protected void onResume() {
+                super.onResume();
+                setUpMapIfNeeded();
+            } */
+
+
+
+            private void setUpMapIfNeeded() {
                 if (mMap == null) {
                     mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 
                     if (mMap != null) {
                         setUpMap();
-
 
                         // *** Code for infowindow ***
                         // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
@@ -371,43 +388,6 @@ public class DisplayActivity extends AppCompatActivity {
                             @Override
                             public View getInfoContents(Marker marker) {
 
-
-
-                                String m = markerMap.get(marker.getId());
-
-
-                                if (m.equals("mCA")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mOR")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mTP")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mTGIF")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mSI")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mDG")) {
-                                    marker.setVisible(true);
-                                } else if (m.equals("mD2")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mEG")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mCFJ")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mTB")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mLA")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mTemB")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mTC")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mAB")) {
-                                    marker.setVisible(false);
-                                } else if (m.equals("mIC")) {
-                                    marker.setVisible(false);
-                                }
-
                                 View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
                                 TextView tvName = (TextView) v.findViewById(R.id.tv_name);
                                 TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
@@ -419,8 +399,6 @@ public class DisplayActivity extends AppCompatActivity {
                                 tvAddress.setText(marker.getSnippet());
                                 // tvHours.setText(marker.getSnippet());
 
-
-
                                 return v;
                             }
                         });
@@ -430,66 +408,56 @@ public class DisplayActivity extends AppCompatActivity {
                         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                             @Override
                             public void onInfoWindowClick(Marker marker) {
-                                // To access hashmap array to bring to different activities
-                                String m = markerMap.get(marker.getId());
 
-                                if (m.equals("mCA")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mOR")) {
-                                    Intent i = new Intent(DisplayActivity.this, AddDetailActivity.class);
-                                    startActivity(i);
-                                } else if (m.equals("mTP")) {
-                                    Intent i = new Intent(DisplayActivity.this, CocktailScreen.class);
-                                    startActivity(i);
-                                } else if (m.equals("mTGIF")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mSI")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mDG")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mD2")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mEG")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mCFJ")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mTB")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mLA")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mTemB")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mTC")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mAB")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                } else if (m.equals("mIC")) {
-                                    Intent i = new Intent(DisplayActivity.this, itp2.class);
-                                    startActivity(i);
-                                }
 
                                 // Use code below if you want all infowindows to bring you to the same window
-                                //  Intent intent = new Intent(MapsActivity.this, itp2.class);
-                                // startActivity(intent);
+                                Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                                startActivity(intent);
                             }
                         });
                     }
                 }
 
-            /*
-                String m = markerMap.get(marker.getId());
+            }
+
+
+            public void setUpMap() {
+
+                String id = null;
+
+
+
+                // MARKER: DICEYS GARDEN
+                Marker mDG = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(53.335719, -6.263619))
+                        .title("Dicey's Garden")
+                        .snippet("21-25 Harcourt St, Dublin 2")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+                // Hashmap array entry
+                id = mDG.getId();
+                markerMap.put(id, "mDG");
+
+
+                // FOR CONTROLS ON THE MAP ITSELF
+                UiSettings settings = mMap.getUiSettings();
+                settings.setCompassEnabled( true );
+                settings.setRotateGesturesEnabled( true );
+                settings.setScrollGesturesEnabled( true );
+                settings.setTiltGesturesEnabled( true );
+                settings.setZoomControlsEnabled( true);
+                settings.setZoomGesturesEnabled( true );
+                settings.setMapToolbarEnabled(true);
+
+                // mMap.setMyLocationEnabled(true);
+                // Set camera to load up on diceys
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335719, -6.263619), 15.0f));
+
+
+
+            }
+
+              /*  String m = markerMap.get(marker.getId());
 
 
                        if (m.equals("mCA")) {
@@ -566,6 +534,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r) {
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -588,6 +557,109 @@ public class DisplayActivity extends AppCompatActivity {
             if (pDialog.isShowing()) {
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+        //private GoogleMap mMap;
+
+
+        // CODE TAKEN FROM TECH ACADEMY TUTORIAL
+
+
+
+           /*  @Override
+            protected void onResume() {
+                super.onResume();
+                setUpMapIfNeeded();
+            } */
+
+
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+
+
+
+            // MARKER: The Palace
+            Marker mTP = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.335940, -6.265624))
+                    .title("The Palace")
+                    .snippet("84-87 Camden Street Lower, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+            // Hashmap array entry
+            id = mTP.getId();
+            markerMap.put(id, "mTP");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // mMap.setMyLocationEnabled(true);
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335940, -6.265624), 15.0f));
+
+
+
         }
     }
 
@@ -612,6 +684,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r) {
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -635,6 +708,108 @@ public class DisplayActivity extends AppCompatActivity {
                 pDialog.dismiss();
             }
         }
+
+        // ******** FOR MAP ************ - CMalone
+        //private GoogleMap mMap;
+
+
+        // CODE TAKEN FROM TECH ACADEMY TUTORIAL
+
+
+
+           /*  @Override
+            protected void onResume() {
+                super.onResume();
+                setUpMapIfNeeded();
+            } */
+
+
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+
+            // MARKER: EVERLEIGH GARDEN'S
+            Marker mEG = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.335181, -6.263543))
+                    .title("Everleigh Garden's")
+                    .snippet("33 Harcourt St, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+            // Hashmap array entry
+            id = mEG.getId();
+            markerMap.put(id, "mEG");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // mMap.setMyLocationEnabled(true);
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335181, -6.263543), 15.0f));
+
+
+
+        }
+
     }
 
     //DTWO DETAILS
@@ -658,6 +833,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r) {
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -680,6 +856,95 @@ public class DisplayActivity extends AppCompatActivity {
             if (pDialog.isShowing()) {
                 pDialog.dismiss();
             }
+        }
+
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+
+
+            // MARKER: DTWO
+            Marker mD2 = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.334425, -6.262743))
+                    .title("DTwo")
+                    .snippet("60 Harcourt St, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+            // Hashmap array entry
+            id = mD2.getId();
+            markerMap.put(id, "mD2");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // mMap.setMyLocationEnabled(true);
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.334425, -6.262743), 15.0f));
+
+
+
         }
     }
 
@@ -704,6 +969,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r) {
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -726,6 +992,91 @@ public class DisplayActivity extends AppCompatActivity {
             if (pDialog.isShowing()) {
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+
+
+            //MARKER: COPPER FACE JACK'S
+            Marker mCFJ =  mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.335377, -6.263599))
+                    .title("Copper Face Jack's")
+                    .snippet("29-30 Harcourt St, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
+
+            // Hashmap array entry
+            id = mCFJ.getId();
+            markerMap.put(id, "mCFJ");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // mMap.setMyLocationEnabled(true);
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.335377, -6.263599), 15.0f));
         }
     }
 
@@ -752,6 +1103,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -776,6 +1128,90 @@ public class DisplayActivity extends AppCompatActivity {
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+
+            // MARKER:SINNOTTS
+            Marker mSI = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.340136, -6.2637727))
+                    .title("Sinnotts")
+                    .snippet("South King Street, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+            // Hashmap array entry
+            id = mSI.getId();
+            markerMap.put(id, "mSI");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // mMap.setMyLocationEnabled(true);
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.340136, -6.2637727), 15.0f));
         }
     }
 
@@ -800,6 +1236,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -824,6 +1261,90 @@ public class DisplayActivity extends AppCompatActivity {
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+
+            // MARKER:O'REILLYS
+            Marker mOR = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.3469988, -6.2563745))
+                    .title("O'Reillys")
+                    .snippet("2 Poolbeg St, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+            // Hashmap array entry
+            id = mOR.getId();
+            markerMap.put(id, "mOR");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // mMap.setMyLocationEnabled(true);
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3469988, -6.2563745), 15.0f));
         }
     }
 
@@ -848,6 +1369,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -872,6 +1394,89 @@ public class DisplayActivity extends AppCompatActivity {
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+
+            // MARKER: TRINITY BAR
+            Marker mTB = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.3404330, -6.263613))
+                    .title("Trinity Bar")
+                    .snippet("46-47 Dame St")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+            // Hashmap array entry
+            id = mTB.getId();
+            markerMap.put(id, "mTB");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3404330, -6.263613), 15.0f));
         }
     }
 
@@ -896,6 +1501,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -920,6 +1526,87 @@ public class DisplayActivity extends AppCompatActivity {
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
+        }
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+            // MARKER: LAGOONA
+            Marker mLA = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.349617, -6.243003))
+                    .title("Lagoona")
+                    .snippet("Unit 4, Custom House Square, Mayor St Lower, Dublin 1")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+            // Hashmap array entry
+            id = mLA.getId();
+            markerMap.put(id, "mLA");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.349617, -6.243003), 15.0f));
         }
     }
 
@@ -944,6 +1631,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -969,6 +1657,88 @@ public class DisplayActivity extends AppCompatActivity {
                 pDialog.dismiss();
             }
         }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+            // MARKER: THE TEMPLE BAR
+            Marker mTemB =mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.345475, -6.264189))
+                    .title("The Temple Bar")
+                    .snippet("247-48 Temple Bar, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
+
+            // Hashmap array entry
+            id = mTemB.getId();
+            markerMap.put(id, "mTemB");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.345475, -6.264189), 15.0f));
+        }
     }
 
     //CAPTAINS DETAILS
@@ -992,6 +1762,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -1016,6 +1787,90 @@ public class DisplayActivity extends AppCompatActivity {
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+            // MARKER: CAPTAIN AMERICAS
+
+            Marker mCA = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.3405075, -6.2628862))
+                    .title("Captain America's")
+                    .snippet("44 Grafton St, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+
+
+            // Hashmap array entry
+            id = mCA.getId();
+            markerMap.put(id, "mCA");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3405075, -6.2628862), 15.0f));
         }
     }
 
@@ -1040,6 +1895,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -1064,6 +1920,88 @@ public class DisplayActivity extends AppCompatActivity {
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+           // MARKER: TGI FRIDAYS
+            Marker mTGIF = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.3397012, -6.2634227))
+                    .title("Tgi Friday's")
+                    .snippet("St Stephen's Green, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+
+            // Hashmap array entry
+            id = mTGIF.getId();
+            markerMap.put(id, "mTGIF");
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3397012, -6.2634227), 15.0f));
         }
     }
 
@@ -1088,6 +2026,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -1112,6 +2051,89 @@ public class DisplayActivity extends AppCompatActivity {
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+            // MARKER: THE COUNTER
+            Marker mTC =mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.343368, -6.260031))
+                    .title("The Counter")
+                    .snippet("20 Suffolk St, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+
+            // Hashmap array entry
+            id = mTC.getId();
+            markerMap.put(id, "mTC");
+
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.343368, -6.260031), 15.0f));
         }
     }
 
@@ -1136,6 +2158,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -1160,6 +2183,89 @@ public class DisplayActivity extends AppCompatActivity {
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+            // MARKER: AUSSIE BBQ
+            Marker mAB = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.331180, -6.264750))
+                    .title("Aussie BBQ")
+                    .snippet("45 South Richmond St, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+
+            // Hashmap array entry
+            id = mAB.getId();
+            markerMap.put(id, "mAB");
+
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.331180, -6.264750), 15.0f));
         }
     }
 
@@ -1184,6 +2290,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void r){
+            setUpMapIfNeeded();
             hideDialog();
             try {
                 if (details != null && details.next()) {
@@ -1208,6 +2315,89 @@ public class DisplayActivity extends AppCompatActivity {
             if(pDialog.isShowing()){
                 pDialog.dismiss();
             }
+        }
+
+        // ******** FOR MAP ************ - CMalone
+
+        private void setUpMapIfNeeded() {
+            if (mMap == null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+
+                if (mMap != null) {
+                    setUpMap();
+
+                    // *** Code for infowindow ***
+                    // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+                    mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+
+                            View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                            TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                            TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+                            //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
+
+                            // LatLng ll = marker.getPosition();
+
+                            tvName.setText(marker.getTitle());
+                            tvAddress.setText(marker.getSnippet());
+                            // tvHours.setText(marker.getSnippet());
+
+                            return v;
+                        }
+                    });
+
+                    // *** For a new activity to open when info window is clicked ***
+
+                    mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+
+
+                            // Use code below if you want all infowindows to bring you to the same window
+                            Intent intent = new Intent(DisplayActivity.this, MapsActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+        }
+
+
+        public void setUpMap() {
+
+            String id = null;
+            // MARKER: THE ITALIAN CORNER RESTAURANT
+            Marker mIC = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(53.345644, -6.264745))
+                    .title("The Italian Corner Restaurant")
+                    .snippet("23/24 Wellington Quay, Dublin 2")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
+
+            // Hashmap array entry
+            id = mIC.getId();
+            markerMap.put(id, "mIC");
+
+
+
+            // FOR CONTROLS ON THE MAP ITSELF
+            UiSettings settings = mMap.getUiSettings();
+            settings.setCompassEnabled( true );
+            settings.setRotateGesturesEnabled( true );
+            settings.setScrollGesturesEnabled( true );
+            settings.setTiltGesturesEnabled( true );
+            settings.setZoomControlsEnabled( true);
+            settings.setZoomGesturesEnabled( true );
+            settings.setMapToolbarEnabled(true);
+
+            // Set camera to load up on the palace
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.345644, -6.264745), 15.0f));
         }
     }
 
@@ -1597,7 +2787,7 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
-
+/*
 
     // ******** FOR MAP ************ - CM
     //private GoogleMap mMap;
@@ -1719,7 +2909,7 @@ public class DisplayActivity extends AppCompatActivity {
         String id = null;
 
 
-/* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU */
+*//* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU *//*
 
 
         // MARKER: CAPTAIN AMERICAS
@@ -1938,7 +3128,7 @@ public class DisplayActivity extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
 
 
