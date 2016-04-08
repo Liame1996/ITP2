@@ -33,6 +33,7 @@
 
     <string-array name="markerType">
         <!-- IF ONE OF THESE IS SELECTED IT NARROWS THE DROPDOWN MENU BELOW AND SHOWING ONLY MARKERS FROM SELECTED ON MAP -->
+        <item> All </item>
         <item> Bar/Club </item>
         <item> Pub </item>
         <item> Restaurant </item>
@@ -46,4 +47,5 @@
         <item> Etc </item>
     </string-array>
     <string name="title_activity_facebook">FacebookActivity</string>
+
 </resources>

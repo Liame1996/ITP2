@@ -54,7 +54,8 @@
                 android:id="@+id/titleID"
                 android:layout_gravity="center_horizontal"
                 android:textSize="30dp"
-                android:paddingBottom="10dp" />
+                android:paddingBottom="10dp"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
 
@@ -73,7 +74,8 @@
                 android:id="@+id/textView3"
                 android:textSize="30dp"
                 android:paddingBottom="10dp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -81,7 +83,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/ingredientsID"
                 android:layout_gravity="center_horizontal"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -92,7 +95,8 @@
                 android:layout_gravity="center_horizontal|left"
                 android:textSize="30dp"
                 android:paddingTop="10dp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -100,7 +104,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/descriptionID"
                 android:layout_gravity="center_horizontal"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -111,7 +116,8 @@
                 android:layout_gravity="center_horizontal|left"
                 android:textSize="30dp"
                 android:paddingTop="10dp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -119,7 +125,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/factID"
                 android:layout_gravity="center_horizontal"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
 
