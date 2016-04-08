@@ -21,16 +21,8 @@ public class FactFragment extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.homescreen, container, false);
-        Button goTo = (Button) view.findViewById(R.id.moreDetails);
-        goTo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(getActivity(), FactsActivity.class);
-                i.putExtra("Extra", "Whiskey");
-                getActivity().startActivity(i);
-            }
-        });
+        View view = inflater.inflate(R.layout.content_facts, container, false);
+
 
         return view;
 
