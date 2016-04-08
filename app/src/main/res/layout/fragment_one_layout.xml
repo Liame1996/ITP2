@@ -47,7 +47,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/diceys"
-                    android:src="@drawable/diceys" />
+                    android:src="@drawable/diceystext" />
+                <!--  android:src="@drawable/diceys" -->
 
             </LinearLayout>
 
@@ -60,7 +61,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/palace"
-                    android:src="@drawable/palace" />
+                    android:src="@drawable/palacetext" />
+                <!--  android:src="@drawable/palace" /> -->
             </LinearLayout>
 
             <LinearLayout
@@ -72,7 +74,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/dtwo"
-                    android:src="@drawable/dtwo" />
+                    android:src="@drawable/dtwotext" />
+                <!--  android:src="@drawable/dtwo" /> -->
             </LinearLayout>
 
             <LinearLayout
@@ -84,19 +87,22 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/everleigh"
-                    android:src="@drawable/everleigh" />
+                    android:src="@drawable/everleightext" />
+                <!--     android:src="@drawable/everleigh" /> -->
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
+                android:layout_height="150dp"
+                android:layout_marginBottom="30dp">
 
                 <ImageButton
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/coppers"
-                    android:src="@drawable/coppers" />
+                    android:src="@drawable/copperstext" />
+                <!--  android:src="@drawable/coppers" /> -->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
