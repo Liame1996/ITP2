@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -90,40 +92,54 @@ public class DisplayActivity extends AppCompatActivity {
 
         if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Diceys")){
             new getDiceysDetails().execute();
-            diceysTimer();
+            DiceysCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Palace")){
             new getPalaceDetails().execute();
+            PalaceCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Dtwo")){
             new getDtwoDetails().execute();
+            DtwoCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Everleigh")){
             new getEverleighDetails().execute();
+            EverleighCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Coppers")){
             new getCoppersDetails().execute();
+            CoppersCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Sinnotts")){
             new getSinnottsDetails().execute();
+            SinnottsCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Oreillys")){
             new getOreillysDetails().execute();
+            OreillysCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Trinity")){
             new getTrinityDetails().execute();
+            TrinityCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Lagoona")){
             new getLagoonaDetails().execute();
+            LagoonaCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Temple")){
             new getTempleDetails().execute();
+            TempleCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Captains")){
             new getCaptainsDetails().execute();
+            CaptainsCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Tgif")){
             new getTgifDetails().execute();
+            TgifCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Counter")){
             new getCounterDetails().execute();
+            CounterCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Aussiebbq")){
             new getAussiebbqDetails().execute();
+            AussiebbqCountDownStart();
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Italian")){
             new getItalianDetails().execute();
+            ItalianCountDownStart();
         }
 
 
         initUI();
-        countDownStart();
+        //countDownStart();
 
 
 
@@ -230,37 +246,64 @@ public class DisplayActivity extends AppCompatActivity {
         tvSecond = (TextView) findViewById(R.id.txtTimerSecond);
     }
 
-    public void countDownStart() {
+    public void DiceysCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
             @Override
             public void run() {
                 handler.postDelayed(this, 1000);
-                try {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat(
-                            "ss-mm-hh-dd-MM-yyyy");
-                    // Here Set your Event Date
-                    Date futureDate = dateFormat.parse("00-00-03-12-03-2016");
-                    Date currentDate = new Date();
-                    if (!currentDate.after(futureDate)) {
-                        long diff = futureDate.getTime()
-                                - currentDate.getTime();
-                        long days = diff / (24 * 60 * 60 * 1000);
-                        diff -= days * (24 * 60 * 60 * 1000);
-                        long hours = diff / (60 * 60 * 1000);
-                        diff -= hours * (60 * 60 * 1000);
-                        long minutes = diff / (60 * 1000);
-                        diff -= minutes * (60 * 1000);
-                        long seconds = diff / 1000;
-                        tvDay.setText("" + String.format("%02d", days));
-                        tvHour.setText("" + String.format("%02d", hours));
-                        tvMinute.setText("" + String.format("%02d", minutes));
-                        tvSecond.setText("" + String.format("%02d", seconds));
-                    } else {
-                        countdownLayout.setVisibility(View.VISIBLE);
-                        handler.removeCallbacks(runnable);
-                        // handler.removeMessages(0);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                    Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) {
+                        Date startTime = dateFormat.parse("16:00:00");
+                        Date endTime = dateFormat.parse("02:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
                     }
+                    //} else {
+                        //countdownLayout.setVisibility(View.VISIBLE);
+                        //handler.removeCallbacks(runnable);
+                        // handler.removeMessages(0);
+                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -269,47 +312,1620 @@ public class DisplayActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 0);
     }
 
-    public class countDown extends CountDownTimer{
-        public countDown(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-            long millis = millisUntilFinished;
-            String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-                    TimeUnit.MILLISECONDS.toMinutes(millis)-TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                    TimeUnit.MILLISECONDS.toSeconds(millis)-TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-            countTV.setText(hms);
-
-        }
-
-        @Override
-        public void onFinish() {
-            countTV.setText("00:00:00");
-        }
+    public void PalaceCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) {
+                        Date startTime = dateFormat.parse("22:00:00");
+                        Date endTime = dateFormat.parse("02:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
     }
 
-    public void diceysTimer(){
-        Calendar cal = Calendar.getInstance();
-
-        final countDown timerDiceys = new countDown(37800000, 1000);
-        if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
-            timerDiceys.start();
-        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
-            timerDiceys.start();
-        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
-            timerDiceys.start();
-        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
-            timerDiceys.start();
-        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
-            timerDiceys.start();
-        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
-            timerDiceys.start();
-        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY && cal.get(Calendar.HOUR_OF_DAY)>=16) {
-            timerDiceys.start();
-        }
+    public void DtwoCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) {
+                        Date startTime = dateFormat.parse("23:00:00");
+                        Date endTime = dateFormat.parse("02:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
     }
+
+    public void EverleighCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY){
+                        Date startTime = dateFormat.parse("22:30:00");
+                        Date endTime = dateFormat.parse("03:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY){
+                        Date startTime = dateFormat.parse("23:00:00");
+                        Date endTime = dateFormat.parse("03:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                        Date startTime = dateFormat.parse("23:00:00");
+                        Date endTime = dateFormat.parse("05:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
+                        Date startTime = dateFormat.parse("23:00:00");
+                        Date endTime = dateFormat.parse("24:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+
+    public void CoppersCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) {
+                        Date startTime = dateFormat.parse("23:30:00");
+                        Date endTime = dateFormat.parse("03:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void SinnottsCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY) {
+                        Date startTime = dateFormat.parse("08:00:00");
+                        Date endTime = dateFormat.parse("23:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY){
+                        Date startTime = dateFormat.parse("08:00:00");
+                        Date endTime = dateFormat.parse("02:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                        Date startTime = dateFormat.parse("10:30:00");
+                        Date endTime = dateFormat.parse("24:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("23:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void OreillysCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY) {
+                        Date startTime = dateFormat.parse("16:00:00");
+                        Date endTime = dateFormat.parse("23:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY){
+                        Date startTime = dateFormat.parse("16:00:00");
+                        Date endTime = dateFormat.parse("03:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                        Date startTime = dateFormat.parse("17:00:00");
+                        Date endTime = dateFormat.parse("03:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
+                        Date startTime = dateFormat.parse("17:00:00");
+                        Date endTime = dateFormat.parse("23:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void TrinityCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) {
+                        Date startTime = dateFormat.parse("08:00:00");
+                        Date endTime = dateFormat.parse("24:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                        Date startTime = dateFormat.parse("08:00:00");
+                        Date endTime = dateFormat.parse("02:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void LagoonaCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY) {
+                        Date startTime = dateFormat.parse("10:00:00");
+                        Date endTime = dateFormat.parse("23:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("24:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("23:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void TempleCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY) {
+                        Date startTime = dateFormat.parse("10:30:00");
+                        Date endTime = dateFormat.parse("01:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                        Date startTime = dateFormat.parse("10:30:00");
+                        Date endTime = dateFormat.parse("02:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
+                        Date startTime = dateFormat.parse("11:30:00");
+                        Date endTime = dateFormat.parse("01:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void CaptainsCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) {
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("02:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void TgifCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) {
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("22:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("23:30:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void CounterCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY) {
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("22:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("23:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("21:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void AussiebbqCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) {
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("24:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
+                        Date startTime = dateFormat.parse("12:00:00");
+                        Date endTime = dateFormat.parse("02:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+    public void ItalianCountDownStart() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY ||
+                            cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY) {
+                        Date startTime = dateFormat.parse("08:00:00");
+                        Date endTime = dateFormat.parse("22:00:00");
+                        String currentTimeString = dateFormat.format(cal.getTime());
+                        Date currentTimeDate = dateFormat.parse(currentTimeString);
+                        if (currentTimeDate.after(startTime)) {
+                            long diff = endTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long days = diff / (24 * 60 * 60 * 1000);
+                                diff -= days * (24 * 60 * 60 * 1000);
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                tvDay.setText("" + String.format("%02d", days));
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                                //}
+                            }
+                        }
+                    }
+                    //} else {
+                    //countdownLayout.setVisibility(View.VISIBLE);
+                    //handler.removeCallbacks(runnable);
+                    // handler.removeMessages(0);
+                    //}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+
+//    public class countDown extends CountDownTimer{
+//        public countDown(long millisInFuture, long countDownInterval) {
+//            super(millisInFuture, countDownInterval);
+//        }
+//
+//        @Override
+//        public void onTick(long millisUntilFinished) {
+//            long millis = millisUntilFinished;
+//            String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+//                    TimeUnit.MILLISECONDS.toMinutes(millis)-TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+//                    TimeUnit.MILLISECONDS.toSeconds(millis)-TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+//            countTV.setText(hms);
+//
+//        }
+//
+//        @Override
+//        public void onFinish() {
+//            countTV.setText("00:00:00");
+//        }
+//    }
+//
+//    public void diceysTimer(){
+//        Calendar cal = Calendar.getInstance();
+////        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+////
+////        try {
+////            final countDown timerDiceys = new countDown(37800000, 1000);
+////
+////            Date startTime = dateFormat.parse("10:00");
+////
+////            if(System.currentTimeMillis()==startTime.getTime()){
+////                timerDiceys.start();
+////            }
+////        } catch (ParseException e) {
+////            e.printStackTrace();
+////        }
+//
+//        final countDown timerDiceys = new countDown(37800000, 1000);
+//
+//
+//        if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
+//            timerDiceys.start();
+//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
+//            timerDiceys.start();
+//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
+//            timerDiceys.start();
+//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
+//            timerDiceys.start();
+//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY && cal.get(Calendar.HOUR_OF_DAY)==10) {
+//            timerDiceys.start();
+//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
+//            timerDiceys.start();
+//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
+//            timerDiceys.start();
+//        }
+//
+//    }
 
 
 
