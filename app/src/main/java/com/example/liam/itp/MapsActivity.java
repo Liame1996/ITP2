@@ -222,7 +222,7 @@ public class MapsActivity extends AppCompatActivity {
                         String m = markerMap.get(marker.getId());
 
                         if(m.equals("mCA")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
                             startActivity(i);
                         } else if(m.equals("mOR")){
                             Intent i = new Intent(MapsActivity.this, AddDetailActivity.class);

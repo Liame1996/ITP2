@@ -8,8 +8,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_facts">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -136,29 +135,6 @@
             android:layout_height="match_parent"
             android:id="@+id/buttons">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Prev"
-                android:id="@+id/prevButton"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:layout_marginTop="140dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Next"
-                android:id="@+id/nextButton"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="20dp"
-                android:layout_marginTop="140dp" />
         </LinearLayout>
 
     </LinearLayout>

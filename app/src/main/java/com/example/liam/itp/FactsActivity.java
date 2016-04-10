@@ -27,7 +27,7 @@ public class FactsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_facts);
+        setContentView(R.layout.content_facts);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,8 +38,7 @@ public class FactsActivity extends AppCompatActivity {
         FactV = (TextView)findViewById(R.id.factID);
 
 
-        prevButton = (Button)findViewById(R.id.prevButton);
-        nextButton = (Button)findViewById(R.id.nextButton);
+
 
         if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Whiskey")){
             new getWhiskeyDetails().execute();
@@ -58,34 +57,6 @@ public class FactsActivity extends AppCompatActivity {
         }else if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Cider")) {
             new getCiderDetails().execute();
         }
-
-
-        prevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (details != null && details.previous()) {
-                        display(details.getString("Title"), details.getString("Ingredients"), details.getString("Description"), details.getString("Fact")+ "");
-                    }
-                } catch (SQLException s) {
-                    Log.e("", s.getMessage());
-                }
-            }
-        });
-
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (details != null && details.next()) {
-                        display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact")+"");
-                    }
-                }
-                catch(SQLException s){
-                    Log.e("", s.getMessage());
-                }
-            }
-        });
 
 
     }
