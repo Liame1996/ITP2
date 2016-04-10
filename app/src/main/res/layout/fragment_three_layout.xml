@@ -15,7 +15,7 @@
         android:layout_below="@id/navBar"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:background="@drawable/border">
+        android:background="#ffffff">
 
         <LinearLayout
             android:orientation="vertical"
@@ -49,7 +49,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/captains"
-                    android:src="@drawable/captains"/>
+                    android:src="@drawable/captainstext" />
+                   <!--  android:src="@drawable/captains"/> -->
             </LinearLayout>
 
             <LinearLayout
@@ -61,7 +62,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/tgif"
-                    android:src="@drawable/tgif"/>
+                    android:src="@drawable/tgif" />
+                   <!--  android:src="@drawable/tgiftext"/> -->
             </LinearLayout>
 
             <LinearLayout
@@ -73,7 +75,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/counter"
-                    android:src="@drawable/counter"/>
+                    android:src="@drawable/counter" />
+                    <!-- android:src="@drawable/countertext"/> -->
             </LinearLayout>
 
             <LinearLayout
@@ -85,8 +88,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/aussiebbq"
-                    android:src="@drawable/aussietext" />
-                    <!-- android:src="@drawable/aussiebbq"/> -->
+                    android:src="@drawable/aussiebbq" />
+                    <!-- android:src="@drawable/aussietext"/> -->
             </LinearLayout>
 
             <LinearLayout
@@ -99,7 +102,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/itailian"
-                    android:src="@drawable/itailian"/>
+                    android:src="@drawable/italiantext" />
+                  <!--   android:src="@drawable/itailiantext"/> -->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
