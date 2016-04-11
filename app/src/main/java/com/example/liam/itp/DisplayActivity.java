@@ -49,12 +49,10 @@ import java.util.concurrent.TimeUnit;
 
 public class DisplayActivity extends AppCompatActivity {
 
-    private TextView nameV, typeV, addressV, emailV, phoneV, tvDay, tvHour, tvMinute, tvSecond, countTV;
-    private Button prevButton, nextButton, addButton;
+    private TextView nameV, typeV, addressV, emailV, phoneV, tvHour, tvMinute, tvSecond, openClose, openingClosing;
     private LinearLayout countdownLayout;
     private Handler handler;
     private Runnable runnable;
-    private ImageButton homeBtn, addVenueBtn, locationBtn, cocktailsBtn;
 
     private ResultSet details = null;
 
@@ -73,21 +71,8 @@ public class DisplayActivity extends AppCompatActivity {
         addressV = (TextView)findViewById(R.id.addressID);
         emailV = (TextView)findViewById(R.id.emailID);
         phoneV = (TextView)findViewById(R.id.phoneID);
-        countTV = (TextView)findViewById(R.id.countTV);
-
-        countTV.setText("00:00:00");
-        //final countDown timerDiceys = new countDown(180000, 1000);
-        //final countDown timerPalace = new countDown(18000, 1000);
-
-        //timerDiceys.start();
-        //timerPalace.start();
-
-
-
-//        prevButton = (Button)findViewById(R.id.prevBtn);
-//        nextButton = (Button)findViewById(R.id.nextBtn);
-//        addButton = (Button)findViewById(R.id.addBtn);
-
+        openClose = (TextView)findViewById(R.id.openClose);
+        openingClosing = (TextView)findViewById(R.id.openingClosing);
 
 
         if(getIntent().getStringExtra("Extra").equalsIgnoreCase("Diceys")){
@@ -139,47 +124,6 @@ public class DisplayActivity extends AppCompatActivity {
 
 
         initUI();
-        //countDownStart();
-
-
-
-//        prevButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    if (details != null && details.previous()) {
-//                        display(details.getString("C_NAME"), details.getString("CATEG"), details.getString("ADDRESS"), details.getString("EMAIL"), details.getString("PHONE") + "");
-//                    }
-//                } catch (SQLException s) {
-//                    Log.e("", s.getMessage());
-//                }
-//            }
-//        });
-//
-//        nextButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    if (details != null && details.next()) {
-//                        display(details.getString("C_NAME"), details.getString("CATEG"),details.getString("ADDRESS"),details.getString("EMAIL"),details.getString("PHONE") +"");
-//                    }
-//                }
-//                catch(SQLException s){
-//                    Log.e("", s.getMessage());
-//                }
-//            }
-//        });
-//
-//        addButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(DisplayActivity.this, AddDetailActivity.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
-
-
     }
 
     @Override
@@ -240,7 +184,6 @@ public class DisplayActivity extends AppCompatActivity {
     @SuppressLint("SimpleDateFormat")
     private void initUI() {
         countdownLayout = (LinearLayout) findViewById(R.id.innerCountdownLayout);
-        tvDay = (TextView) findViewById(R.id.txtTimerDay);
         tvHour = (TextView) findViewById(R.id.txtTimerHour);
         tvMinute = (TextView) findViewById(R.id.txtTimerMinute);
         tvSecond = (TextView) findViewById(R.id.txtTimerSecond);
@@ -272,38 +215,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                        //countdownLayout.setVisibility(View.VISIBLE);
-                        //handler.removeCallbacks(runnable);
-                        // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -338,37 +301,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -403,37 +387,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -462,26 +467,52 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
@@ -500,26 +531,52 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
@@ -537,26 +594,52 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
@@ -573,37 +656,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -638,37 +742,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -698,30 +823,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
@@ -736,30 +886,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
@@ -773,30 +948,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
@@ -810,39 +1010,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
-
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -873,30 +1092,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY){
@@ -910,30 +1154,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
@@ -947,30 +1216,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
@@ -984,38 +1278,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1048,30 +1362,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY){
@@ -1085,38 +1424,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1147,30 +1506,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
@@ -1185,30 +1569,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
@@ -1223,38 +1632,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1284,30 +1713,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
@@ -1323,30 +1777,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
@@ -1360,38 +1839,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1425,38 +1924,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1488,30 +2007,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
@@ -1526,38 +2070,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1588,30 +2152,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY ||
@@ -1626,30 +2215,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
@@ -1663,38 +2277,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1725,30 +2359,55 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY ||
@@ -1764,38 +2423,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1829,38 +2508,58 @@ public class DisplayActivity extends AppCompatActivity {
                                 Date dateMax = dateFormat.parse("24:00:00");
                                 Date dateMin = dateFormat.parse("00:00:00");
                                 diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
                             } else {
-                                long days = diff / (24 * 60 * 60 * 1000);
-                                diff -= days * (24 * 60 * 60 * 1000);
                                 long hours = diff / (60 * 60 * 1000);
                                 diff -= hours * (60 * 60 * 1000);
                                 long minutes = diff / (60 * 1000);
                                 diff -= minutes * (60 * 1000);
                                 long seconds = diff / 1000;
-                                tvDay.setText("" + String.format("%02d", days));
+                                openClose.setText("Currently OPEN");
+                                openingClosing.setText("Closing in:");
                                 tvHour.setText("" + String.format("%02d", hours));
                                 tvMinute.setText("" + String.format("%02d", minutes));
                                 tvSecond.setText("" + String.format("%02d", seconds));
-                                //}
+                            }
+                        }else if(!currentTimeDate.after(startTime) || currentTimeDate.after(endTime)){
+                            long diff = startTime.getTime() - currentTimeDate.getTime();
+                            if (diff < 0) {
+                                Date dateMax = dateFormat.parse("24:00:00");
+                                Date dateMin = dateFormat.parse("00:00:00");
+                                diff = (dateMax.getTime() - currentTimeDate.getTime()) + (endTime.getTime() - dateMin.getTime());
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
+                            } else {
+                                long hours = diff / (60 * 60 * 1000);
+                                diff -= hours * (60 * 60 * 1000);
+                                long minutes = diff / (60 * 1000);
+                                diff -= minutes * (60 * 1000);
+                                long seconds = diff / 1000;
+                                openClose.setText("Currently CLOSED");
+                                openingClosing.setText("Opening in:");
+                                tvHour.setText("" + String.format("%02d", hours));
+                                tvMinute.setText("" + String.format("%02d", minutes));
+                                tvSecond.setText("" + String.format("%02d", seconds));
                             }
                         }
                     }
-                    //} else {
-                    //countdownLayout.setVisibility(View.VISIBLE);
-                    //handler.removeCallbacks(runnable);
-                    // handler.removeMessages(0);
-                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1868,66 +2567,6 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
-
-//    public class countDown extends CountDownTimer{
-//        public countDown(long millisInFuture, long countDownInterval) {
-//            super(millisInFuture, countDownInterval);
-//        }
-//
-//        @Override
-//        public void onTick(long millisUntilFinished) {
-//            long millis = millisUntilFinished;
-//            String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-//                    TimeUnit.MILLISECONDS.toMinutes(millis)-TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-//                    TimeUnit.MILLISECONDS.toSeconds(millis)-TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-//            countTV.setText(hms);
-//
-//        }
-//
-//        @Override
-//        public void onFinish() {
-//            countTV.setText("00:00:00");
-//        }
-//    }
-//
-//    public void diceysTimer(){
-//        Calendar cal = Calendar.getInstance();
-////        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-////
-////        try {
-////            final countDown timerDiceys = new countDown(37800000, 1000);
-////
-////            Date startTime = dateFormat.parse("10:00");
-////
-////            if(System.currentTimeMillis()==startTime.getTime()){
-////                timerDiceys.start();
-////            }
-////        } catch (ParseException e) {
-////            e.printStackTrace();
-////        }
-//
-//        final countDown timerDiceys = new countDown(37800000, 1000);
-//
-//
-//        if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
-//            timerDiceys.start();
-//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
-//            timerDiceys.start();
-//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
-//            timerDiceys.start();
-//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
-//            timerDiceys.start();
-//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY && cal.get(Calendar.HOUR_OF_DAY)==10) {
-//            timerDiceys.start();
-//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
-//            timerDiceys.start();
-//        }else if(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY && cal.get(Calendar.HOUR_OF_DAY)==16) {
-//            timerDiceys.start();
-//        }
-//
-//    }
-
-
 
         //DICEYS DETAILS
         public class getDiceysDetails extends AsyncTask<Void, Void, Void> {
