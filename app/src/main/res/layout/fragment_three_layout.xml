@@ -49,7 +49,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/captains"
-                    android:src="@drawable/captainstext" />
+                    android:src="@drawable/captainstext"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp" />
                    <!--  android:src="@drawable/captains"/> -->
             </LinearLayout>
 
@@ -62,7 +64,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/tgif"
-                    android:src="@drawable/tgif" />
+                    android:src="@drawable/tgif"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp" />
                    <!--  android:src="@drawable/tgiftext"/> -->
             </LinearLayout>
 
@@ -75,7 +79,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/counter"
-                    android:src="@drawable/counter" />
+                    android:src="@drawable/counter"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp" />
                     <!-- android:src="@drawable/countertext"/> -->
             </LinearLayout>
 
@@ -88,7 +94,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/aussiebbq"
-                    android:src="@drawable/aussiebbq" />
+                    android:src="@drawable/aussiebbq"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp" />
                     <!-- android:src="@drawable/aussietext"/> -->
             </LinearLayout>
 
@@ -102,7 +110,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/itailian"
-                    android:src="@drawable/italiantext" />
+                    android:src="@drawable/italiantext"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp" />
                   <!--   android:src="@drawable/itailiantext"/> -->
             </LinearLayout>
         </LinearLayout>
