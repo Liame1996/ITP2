@@ -293,48 +293,63 @@ public class MapsActivity extends AppCompatActivity{
 
                         if(m.equals("mCA")){
                             Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Captains");
                             startActivity(i);
                         } else if(m.equals("mOR")){
-                            Intent i = new Intent(MapsActivity.this, AddDetailActivity.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Oeillys");
                             startActivity(i);
                         } else if(m.equals("mTP")){
-                            Intent i = new Intent(MapsActivity.this, CocktailScreen.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Palace");
                             startActivity(i);
                         } else if(m.equals("mTGIF")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Tgif");
                             startActivity(i);
                         } else if(m.equals("mSI")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Sinnotts");
                             startActivity(i);
                         } else if(m.equals("mDG")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Diceys");
                             startActivity(i);
                         } else if(m.equals("mD2")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Dtwo");
                             startActivity(i);
                         } else if(m.equals("mEG")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Everleigh");
                             startActivity(i);
                         } else if(m.equals("mCFJ")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Coppers");
                             startActivity(i);
                         } else if(m.equals("mTB")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Trinity");
                             startActivity(i);
                         } else if(m.equals("mLA")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Lagoona");
                             startActivity(i);
                         } else if(m.equals("mTemB")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Temple");
                             startActivity(i);
                         } else if(m.equals("mTC")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Counter");
                             startActivity(i);
                         } else if(m.equals("mAB")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Aussiebbq");
                             startActivity(i);
                         } else if(m.equals("mIC")){
-                            Intent i = new Intent(MapsActivity.this, itp2.class);
+                            Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                            i.putExtra("Extra", "Italian");
                             startActivity(i);
                         }
 
