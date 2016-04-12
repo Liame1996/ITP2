@@ -24,8 +24,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 // Code imported for zoom
@@ -45,14 +49,23 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class MapsActivity extends AppCompatActivity {
+public class MapsActivity extends AppCompatActivity{
         //implements GoogleMap.InfoWindowAdapter{
     //implements OnMapReadyCallback {
 
         private GoogleMap mMap;
+        Spinner all;
+        Spinner club;
+        Spinner bar;
+        Spinner restaurant;
+        Spinner spinner;
+        ArrayAdapter<CharSequence> adapter;
+
+
+
+
 
     HashMap<String, String> markerMap = new HashMap<String, String>();
-
 
 
 
@@ -69,7 +82,65 @@ public class MapsActivity extends AppCompatActivity {
 
 
 
+            // ** FOR SPINNER/DROPDOWN ON MAP **
+
+            spinner = (Spinner)findViewById(R.id.markerDD);
+            adapter = ArrayAdapter.createFromResource(this,R.array.markerType, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    Toast.makeText(getBaseContext(), parent.getItemAtPosition(position)+" selected", Toast.LENGTH_LONG).show();
+                    Object item = spinner.getSelectedItem();
+
+
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> arg0) {
+                    // TODO Auto-generated method stub
+                }
+            });
+
+/*
+            Spinner spinner = (Spinner) findViewById(R.id.markerDD);
+            // Create an ArrayAdapter using the string array and a default spinner layout
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                    R.array.markerType, android.R.layout.simple_spinner_item);
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Apply the adapter to the spinner
+            spinner.setAdapter(adapter);
+ */
+
     }
+/*
+    int count;
+    spinner = (Spinner)findViewById(R.id.markerDD);
+
+    spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            // TODO Auto-generated method stub
+            spinner = parent.getItemAtPosition(position).toString();
+            count = position; //this would give you the id of the selected item
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+
+
+    }
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            // TODO Auto-generated method stub
+        } */
+
 
 
     // *** For Toolbar ***
@@ -164,7 +235,6 @@ public class MapsActivity extends AppCompatActivity {
             mMap.animateCamera(CameraUpdateFactory.zoomOut());
         }
     }*/
-
 
 
     // *** CHANGE MAP TYPE ***
@@ -285,6 +355,15 @@ public class MapsActivity extends AppCompatActivity {
 
 
         /* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU */
+
+
+       // Spinner spinner = (Spinner) findViewById(R.id.markerDD);
+      //  spinner.setOnItemSelectedListener(this);
+
+      //  all=(Spinner)findViewById(R.id.all);
+
+        //if(id = R.id.all)
+
 
        // MARKER: CAPTAIN AMERICAS
 
@@ -518,6 +597,11 @@ public class MapsActivity extends AppCompatActivity {
         settings.setZoomControlsEnabled(true);
         settings.setZoomGesturesEnabled(true);
         settings.setMapToolbarEnabled(true);
+
+
+        // ** FOR DROP DOWN OPTION ** -CMalone
+
+
 
 
     }

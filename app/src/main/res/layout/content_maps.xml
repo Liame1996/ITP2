@@ -2,6 +2,7 @@
 
 
 
+
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -121,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Filter"
+                android:text="Where to next?"
                 android:id="@+id/filterTV"
                 android:textSize="30sp"
                 android:textStyle="bold"
@@ -129,11 +130,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="6dp" />
 
-            <ImageView
-                android:layout_width="23dp"
-                android:layout_height="36dp"
-                android:id="@+id/filterIV"
-                android:layout_marginTop="10dp" />
             <!--android:src="@drawable/filter"-->
 
 
@@ -142,21 +138,13 @@
             <Spinner
                 android:layout_width="110dp"
                 android:layout_height="fill_parent"
-                android:id="@+id/type"
+                android:id="@+id/markerDD"
                 android:spinnerMode="dropdown"
                 android:entries="@array/markerType"
                 android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginBottom="20dp"/>
 
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner"
-                android:spinnerMode="dropdown"
-                android:entries="@array/markerPlaces"
-                android:layout_marginBottom="20dp"
-                android:layout_weight="1"
-                android:layout_gravity="right" />
+
 
         </LinearLayout>
 
