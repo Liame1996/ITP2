@@ -46,7 +46,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/sinnotts"
-                 android:src="@drawable/sinnottstext" />
+                 android:src="@drawable/sinnottstext"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp" />
+
                 <!--    android:src="@drawable/sinnotts" /> -->
             </LinearLayout>
 
@@ -59,7 +62,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/oreillys"
-                 android:src="@drawable/oreillystext" />
+                 android:src="@drawable/oreillystext"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp" />
                 <!--     android:src="@drawable/oreillys" /> -->
 
 
@@ -74,7 +79,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/trinity"
-                    android:src="@drawable/trinitytext" />
+                    android:src="@drawable/trinitytext"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp" />
                 <!--     android:src="@drawable/trinity" /> -->
 
             </LinearLayout>
@@ -88,7 +95,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/lagoona"
-                    android:src="@drawable/lagoonatext" />
+                    android:src="@drawable/lagoonatext"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp" />
                    <!-- android:src="@drawable/lagoona" /> -->
 
             </LinearLayout>
@@ -103,7 +112,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/temple"
-                    android:src="@drawable/templetext" />
+                    android:src="@drawable/templetext"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

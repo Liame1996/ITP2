@@ -40,7 +40,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="#ffffff">
 
@@ -49,7 +49,9 @@
                     android:layout_height="fill_parent"
                     android:id="@+id/diceys"
                     android:src="@drawable/diceystext"
-                    android:background="#ffffff" />
+                    android:background="#ffffff"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp" />
                 <!--  android:src="@drawable/diceys" -->
 
             </LinearLayout>
