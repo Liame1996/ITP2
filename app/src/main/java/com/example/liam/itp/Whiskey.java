@@ -27,8 +27,8 @@ public class Whiskey extends Fragment {
         goTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent i = new Intent(getActivity(), DisplayFactsPageViewer.class);
-                //i.putExtra("Extra", "Whiskey");
+                Intent i = new Intent(getActivity(), FactsActivity.class);
+                i.putExtra("Extra", "Whiskey");
                 getActivity().startActivity(i);
             }
         });

@@ -75,10 +75,6 @@
             android:name=".FactsActivity"
             android:label="WhereNext?"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".DisplayFactsPageViewer"
-            android:label="WhereNext?"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

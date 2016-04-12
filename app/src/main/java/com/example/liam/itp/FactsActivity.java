@@ -27,7 +27,7 @@ public class FactsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_facts);
+        setContentView(R.layout.activity_display_facts);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -36,6 +36,11 @@ public class FactsActivity extends AppCompatActivity {
         IngredientsV = (TextView)findViewById(R.id.ingredientsID);
         DescriptionV = (TextView)findViewById(R.id.descriptionID);
         FactV = (TextView)findViewById(R.id.factID);
+
+        prevButton = (Button)findViewById(R.id.prevButton);
+        nextButton = (Button)findViewById(R.id.nextButton);
+
+        prevButton.setVisibility(View.INVISIBLE);
 
 
 
@@ -58,6 +63,39 @@ public class FactsActivity extends AppCompatActivity {
             new getCiderDetails().execute();
         }
 
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    prevButton.setVisibility(View.INVISIBLE);
+                    nextButton.setVisibility(View.VISIBLE);
+
+                    if (details != null && details.previous()) {
+                        display(details.getString("Title"), details.getString("Ingredients"), details.getString("Description"), details.getString("Fact") + "");
+                    }
+                } catch (SQLException s) {
+                    Log.e("", s.getMessage());
+                }
+            }
+        });
+        nextButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                try {
+                    nextButton.setVisibility(View.INVISIBLE);
+                    prevButton.setVisibility(View.VISIBLE);
+
+                    if (details != null && details.next()) {
+                        display(details.getString("Title"), details.getString("Ingredients"),details.getString("Description"),details.getString("Fact")+"");
+                    }
+                }
+                catch(SQLException s){
+                    Log.e("", s.getMessage());
+                    }
+                }
+        });
 
     }
     @Override
@@ -86,7 +124,7 @@ public class FactsActivity extends AppCompatActivity {
             startActivity(i);
             finish();
             return true;
-        }
+       }
         if (id == R.id.cocktailsBtn) {
             Intent i = new Intent(this, CocktailScreen.class);
             startActivity(i);
