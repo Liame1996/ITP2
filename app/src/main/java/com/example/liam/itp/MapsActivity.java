@@ -50,6 +50,7 @@ import java.util.List;
 
 
 public class MapsActivity extends AppCompatActivity {
+        //implements AdapterView.OnItemSelectedListener {
     //implements GoogleMap.InfoWindowAdapter{
     //implements OnMapReadyCallback {
 
@@ -72,7 +73,7 @@ public class MapsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        // ** FOR SPINNER/DROPDOWN ON MAP **
+       // ** FOR SPINNER/DROPDOWN ON MAP **
 
         spinner = (Spinner) findViewById(R.id.markerDD);
         adapter = ArrayAdapter.createFromResource(this, R.array.markerType, android.R.layout.simple_spinner_item);
@@ -81,13 +82,13 @@ public class MapsActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id, Marker marker) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
 
                 Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " selected", Toast.LENGTH_LONG).show();
-               /* Object item = spinner.getSelectedItem();*/
+                Object item = spinner.getSelectedItem();
 
-             /*   String m = markerMap.get(marker.getId());
-                String s = parent.getSelectedItem().toString();
+          /*     String m = markerMap.get(marker.getId());
+                String s = parent.getItemAtPosition(position).toString();
 
                 if (s.equals("All")) {
           if(m.equals("mCA")){
@@ -218,7 +219,8 @@ public class MapsActivity extends AppCompatActivity {
                     } else if(m.equals("mIC")) {
                         marker.setVisible(true); // Italian corner
                     }
-        } */
+        }  */
+
 
                 }
 
@@ -321,9 +323,6 @@ public class MapsActivity extends AppCompatActivity {
     public void changeType(View view) {
         if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
             mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-            // mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-            //} else if(mMap.getMapType() == GoogleMap.MAP_TYPE_TERRAIN){
-            //  mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         } else {
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         }
@@ -423,6 +422,8 @@ public class MapsActivity extends AppCompatActivity {
                         // startActivity(intent);
                     }
                 });
+
+
             }
         }
 
@@ -434,7 +435,7 @@ public class MapsActivity extends AppCompatActivity {
         String id = null;
 
 
-        /* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU */
+        // USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU
 
         // MARKER: CAPTAIN AMERICAS
 
@@ -616,10 +617,11 @@ public class MapsActivity extends AppCompatActivity {
         id = mIC.getId();
         markerMap.put(id, "mIC");
 
-       // Object item = spinner.getSelectedItem();
+        //Object item = spinner.getSelectedItem();
+       // String s = parent.getSelectedItem().toString();
 
-
-        /*if (s == "All") {
+/*
+        if (s == "All") {
            mCA.setVisible(true); //Captain Americas
            mOR.setVisible(true); //O'reillys
             mTP.setVisible(true); //Palace
@@ -684,13 +686,13 @@ public class MapsActivity extends AppCompatActivity {
             mTC.setVisible(true); //Counter
             mAB.setVisible(true); //Aussie bbq
             mIC.setVisible(true); // Italian corner
-        } */
+        }
 
 
 
 
 
-            /*
+
 
             //** END OF ALL IF STATEMENT **
 
@@ -802,9 +804,9 @@ public class MapsActivity extends AppCompatActivity {
             settings.setZoomControlsEnabled(true);
             settings.setZoomGesturesEnabled(true);
             settings.setMapToolbarEnabled(true);
+ */
 
 
-            /*/
         //* END OF ELSE IF CLUB STATEMENT
 
        /* } else if (spinner.getSelectedItem() == "Bars/Pubs") {
@@ -915,7 +917,6 @@ public class MapsActivity extends AppCompatActivity {
             settings.setMapToolbarEnabled(true);
 
 
-            /*
             //** END OF IF ELSE BAR/PUBS STATEMENT**
 
 
@@ -1030,12 +1031,11 @@ public class MapsActivity extends AppCompatActivity {
             settings.setZoomGesturesEnabled(true);
             settings.setMapToolbarEnabled(true);
 
-            /*
-            //** OF ELSE RESTAURANT STATEMENT **
+            /** OF ELSE RESTAURANT STATEMENT **
 
 
-        }*/
-        //}
+        }
+        //} */
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -1061,7 +1061,7 @@ public class MapsActivity extends AppCompatActivity {
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new LatLng(location.getLatitude(), location.getLongitude()))     // Sets the center of the map to location user
-                    .zoom(15)                   // Sets the zoom
+                    .zoom(16)                   // Sets the zoom
                             //  .bearing(30)                // Sets the orientation of the camera to east
                     .tilt(10)                   // Sets the tilt of the camera to 30 degrees
                     .build();                   // Creates a CameraPosition from the builder
@@ -1086,8 +1086,7 @@ public class MapsActivity extends AppCompatActivity {
         settings.setMapToolbarEnabled(true);
     }
 
-
-    }
+}
 
 
 

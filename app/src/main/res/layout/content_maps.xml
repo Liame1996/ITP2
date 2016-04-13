@@ -124,11 +124,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Where to next?"
                 android:id="@+id/filterTV"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="6dp" />
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="5dp" />
 
             <!--android:src="@drawable/filter"-->
 
