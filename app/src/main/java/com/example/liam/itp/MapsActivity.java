@@ -50,9 +50,6 @@ import java.util.List;
 
 
 public class MapsActivity extends AppCompatActivity {
-        //implements AdapterView.OnItemSelectedListener {
-    //implements GoogleMap.InfoWindowAdapter{
-    //implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     Spinner spinner;
@@ -73,7 +70,7 @@ public class MapsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-       // ** FOR SPINNER/DROPDOWN ON MAP **
+        // ** FOR SPINNER/DROPDOWN ON MAP **
 
         spinner = (Spinner) findViewById(R.id.markerDD);
         adapter = ArrayAdapter.createFromResource(this, R.array.markerType, android.R.layout.simple_spinner_item);
@@ -89,7 +86,6 @@ public class MapsActivity extends AppCompatActivity {
 
           /*     String m = markerMap.get(marker.getId());
                 String s = parent.getItemAtPosition(position).toString();
-
                 if (s.equals("All")) {
           if(m.equals("mCA")){
               marker.setVisible(true); //Captain Americas
@@ -122,7 +118,6 @@ public class MapsActivity extends AppCompatActivity {
                     } else if(m.equals("mIC")) {
                         marker.setVisible(true); // Italian corner
                     }
-
         } else if(s.equals("Clubs")){
                     if(m.equals("mCA")){
                         marker.setVisible(false); //Captain Americas
@@ -221,52 +216,14 @@ public class MapsActivity extends AppCompatActivity {
                     }
         }  */
 
-
-                }
-
+            }
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
             }
         });
-
-/*
-            Spinner spinner = (Spinner) findViewById(R.id.markerDD);
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                    R.array.markerType, android.R.layout.simple_spinner_item);
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // Apply the adapter to the spinner
-            spinner.setAdapter(adapter);
- */
-
     }
-/*
-    int count;
-    spinner = (Spinner)findViewById(R.id.markerDD);
-
-    spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            // TODO Auto-generated method stub
-            spinner = parent.getItemAtPosition(position).toString();
-            count = position; //this would give you the id of the selected item
-        }
-
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-
-
-    }
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-            // TODO Auto-generated method stub
-        } */
-
 
     // *** For Toolbar ***
     @Override
@@ -335,7 +292,6 @@ public class MapsActivity extends AppCompatActivity {
             if (mMap != null) {
                 setUpMap();
 
-
                 // *** Code for infowindow ***
                 // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
                 mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -350,14 +306,9 @@ public class MapsActivity extends AppCompatActivity {
                         View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
                         TextView tvName = (TextView) v.findViewById(R.id.tv_name);
                         TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
-                        //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
-
-                        // LatLng ll = marker.getPosition();
 
                         tvName.setText(marker.getTitle());
                         tvAddress.setText(marker.getSnippet());
-                        // tvHours.setText(marker.getSnippet());
-
                         return v;
                     }
                 });
@@ -617,425 +568,6 @@ public class MapsActivity extends AppCompatActivity {
         id = mIC.getId();
         markerMap.put(id, "mIC");
 
-        //Object item = spinner.getSelectedItem();
-       // String s = parent.getSelectedItem().toString();
-
-/*
-        if (s == "All") {
-           mCA.setVisible(true); //Captain Americas
-           mOR.setVisible(true); //O'reillys
-            mTP.setVisible(true); //Palace
-            mTGIF.setVisible(true); //TGIF
-            mSI.setVisible(true); //Sinnotss
-            mDG.setVisible(true); //Diceys
-            mD2.setVisible(true); // dTwo
-            mEG.setVisible(true); //Everleigh
-            mCFJ.setVisible(true); // Coppers
-            mTB.setVisible(true); //Trinity Bar
-            mLA.setVisible(true); //Lagona
-            mTemB.setVisible(true);//Temple Bar
-            mTC.setVisible(true); //Counter
-            mAB.setVisible(true); //Aussie bbq
-            mIC.setVisible(true); // Italian corner
-
-        } else if(s =="Clubs"){
-            mCA.setVisible(false); //Captain Americas
-            mOR.setVisible(false); //O'reillys
-            mTP.setVisible(true); //Palace
-            mTGIF.setVisible(false); //TGIF
-            mSI.setVisible(false); //Sinnotss
-            mDG.setVisible(true); //Diceys
-            mD2.setVisible(true); // dTwo
-            mEG.setVisible(true); //Everleigh
-            mCFJ.setVisible(true); // Coppers
-            mTB.setVisible(false); //Trinity Bar
-            mLA.setVisible(false); //Lagoona
-            mTemB.setVisible(false);//Temple Bar
-            mTC.setVisible(false); //Counter
-            mAB.setVisible(false); //Aussie bbq
-            mIC.setVisible(false); // Italian corner
-        } else if(s =="Bars"){
-            mCA.setVisible(false); //Captain Americas
-            mOR.setVisible(true); //O'reillys
-            mTP.setVisible(false); //Palace
-            mTGIF.setVisible(false); //TGIF
-            mSI.setVisible(true); //Sinnotss
-            mDG.setVisible(false); //Diceys
-            mD2.setVisible(false); // dTwo
-            mEG.setVisible(false); //Everleigh
-            mCFJ.setVisible(false); // Coppers
-            mTB.setVisible(true); //Trinity Bar
-            mLA.setVisible(true); //Lagoona
-            mTemB.setVisible(true);//Temple Bar
-            mTC.setVisible(false); //Counter
-            mAB.setVisible(false); //Aussie bbq
-            mIC.setVisible(false); // Italian corner
-        } else if(s =="Restaurants"){
-            mCA.setVisible(true); //Captain Americas
-            mOR.setVisible(false); //O'reillys
-            mTP.setVisible(false); //Palace
-            mTGIF.setVisible(true); //TGIF
-            mSI.setVisible(false); //Sinnotss
-            mDG.setVisible(false); //Diceys
-            mD2.setVisible(false); // dTwo
-            mEG.setVisible(false); //Everleigh
-            mCFJ.setVisible(false); // Coppers
-            mTB.setVisible(false); //Trinity Bar
-            mLA.setVisible(false); //Lagoona
-            mTemB.setVisible(false);//Temple Bar
-            mTC.setVisible(true); //Counter
-            mAB.setVisible(true); //Aussie bbq
-            mIC.setVisible(true); // Italian corner
-        }
-
-
-
-
-
-
-
-            //** END OF ALL IF STATEMENT **
-
-        } else if (spinner.getSelectedItem() == "Club") {
-
-            // MARKER: THE PALACE
-            Marker mTP = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.335940, -6.265624))
-                    .title("The Palace")
-                    .snippet("84-87 Camden Street Lower, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-            // Hashmap array entry
-            id = mTP.getId();
-            markerMap.put(id, "mTP");
-
-
-            // MARKER: DICEYS GARDEN
-            Marker mDG = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.335719, -6.263619))
-                    .title("Dicey's Garden")
-                    .snippet("21-25 Harcourt St, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-            // Hashmap array entry
-            id = mDG.getId();
-            markerMap.put(id, "mDG");
-
-
-            // MARKER: DTWO
-            Marker mD2 = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.334425, -6.262743))
-                    .title("DTwo")
-                    .snippet("60 Harcourt St, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-            // Hashmap array entry
-            id = mD2.getId();
-            markerMap.put(id, "mD2");
-
-
-            // MARKER: EVERLEIGH GARDEN'S
-            Marker mEG = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.335181, -6.263543))
-                    .title("Everleigh Garden's")
-                    .snippet("33 Harcourt St, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-            // Hashmap array entry
-            id = mEG.getId();
-            markerMap.put(id, "mEG");
-
-
-            //MARKER: COPPER FACE JACK'S
-            Marker mCFJ = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.335377, -6.263599))
-                    .title("Copper Face Jack's")
-                    .snippet("29-30 Harcourt St, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-            // Hashmap array entry
-            id = mCFJ.getId();
-            markerMap.put(id, "mCFJ");
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-
-
-            // *** Loading the map up to the current location ***
-
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-
-            Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-            if (location != null) {
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(location.getLatitude(), location.getLongitude()), 15));
-
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(location.getLatitude(), location.getLongitude()))     // Sets the center of the map to location user
-                        .zoom(15)                   // Sets the zoom
-                                //  .bearing(30)                // Sets the orientation of the camera to east
-                        .tilt(10)                   // Sets the tilt of the camera to 30 degrees
-                        .build();                   // Creates a CameraPosition from the builder
-
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-            }
-
-
-            mMap.setMyLocationEnabled(true);
-            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
-
-
-            // *** FOR CONTROLS ON THE MAP ITSELF ***
-            UiSettings settings = mMap.getUiSettings();
-            settings.setCompassEnabled(true);
-            settings.setRotateGesturesEnabled(true);
-            settings.setScrollGesturesEnabled(true);
-            settings.setTiltGesturesEnabled(true);
-            settings.setZoomControlsEnabled(true);
-            settings.setZoomGesturesEnabled(true);
-            settings.setMapToolbarEnabled(true);
- */
-
-
-        //* END OF ELSE IF CLUB STATEMENT
-
-       /* } else if (spinner.getSelectedItem() == "Bars/Pubs") {
-
-            // MARKER:O'REILLYS
-            Marker mOR = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.3469988, -6.2563745))
-                    .title("O'Reillys")
-                    .snippet("2 Poolbeg St, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-            // Hashmap array entry
-            id = mOR.getId();
-            markerMap.put(id, "mOR");
-
-            // MARKER:SINNOTTS
-            Marker mSI = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.340136, -6.2637727))
-                    .title("Sinnotts")
-                    .snippet("South King Street, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-            // Hashmap array entry
-            id = mSI.getId();
-            markerMap.put(id, "mSI");
-
-            // MARKER: TRINITY BAR
-            Marker mTB = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.3404330, -6.263613))
-                    .title("Trinity Bar")
-                    .snippet("46-47 Dame St")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-            // Hashmap array entry
-            id = mTB.getId();
-            markerMap.put(id, "mTB");
-
-
-            // MARKER: LAGOONA
-            Marker mLA = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.349617, -6.243003))
-                    .title("Lagoona")
-                    .snippet("Unit 4, Custom House Square, Mayor St Lower, Dublin 1")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-            // Hashmap array entry
-            id = mLA.getId();
-            markerMap.put(id, "mLA");
-
-
-            // MARKER: THE TEMPLE BAR
-            Marker mTemB = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.345475, -6.264189))
-                    .title("The Temple Bar")
-                    .snippet("247-48 Temple Bar, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-            // Hashmap array entry
-            id = mTemB.getId();
-            markerMap.put(id, "mTemB");
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-
-
-            // *** Loading the map up to the current location ***
-
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-
-            Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-            if (location != null) {
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(location.getLatitude(), location.getLongitude()), 15));
-
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(location.getLatitude(), location.getLongitude()))     // Sets the center of the map to location user
-                        .zoom(15)                   // Sets the zoom
-                                //  .bearing(30)                // Sets the orientation of the camera to east
-                        .tilt(10)                   // Sets the tilt of the camera to 30 degrees
-                        .build();                   // Creates a CameraPosition from the builder
-
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-            }
-
-
-            mMap.setMyLocationEnabled(true);
-            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
-
-
-            // *** FOR CONTROLS ON THE MAP ITSELF ***
-            UiSettings settings = mMap.getUiSettings();
-            settings.setCompassEnabled(true);
-            settings.setRotateGesturesEnabled(true);
-            settings.setScrollGesturesEnabled(true);
-            settings.setTiltGesturesEnabled(true);
-            settings.setZoomControlsEnabled(true);
-            settings.setZoomGesturesEnabled(true);
-            settings.setMapToolbarEnabled(true);
-
-
-            //** END OF IF ELSE BAR/PUBS STATEMENT**
-
-
-
-        } else if (spinner.getSelectedItem() == "Restaurant") {
-
-            // MARKER: CAPTAIN AMERICAS
-
-            Marker mCA = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.3405075, -6.2628862))
-                    .title("Captain America's")
-                    .snippet("44 Grafton St, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-
-            // Hashmap array entry
-            id = mCA.getId();
-            markerMap.put(id, "mCA");
-
-
-            // MARKER: TGI FRIDAYS
-            Marker mTGIF = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.3397012, -6.2634227))
-                    .title("Tgi Friday's")
-                    .snippet("St Stephen's Green, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-            // Hashmap array entry
-            id = mTGIF.getId();
-            markerMap.put(id, "mTGIF");
-
-
-            // MARKER: THE COUNTER
-            Marker mTC = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.343368, -6.260031))
-                    .title("The Counter")
-                    .snippet("20 Suffolk St, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-            // Hashmap array entry
-            id = mTC.getId();
-            markerMap.put(id, "mTC");
-
-
-            // MARKER: AUSSIE BBQ
-            Marker mAB = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.331180, -6.264750))
-                    .title("Aussie BBQ")
-                    .snippet("45 South Richmond St, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-            // Hashmap array entry
-            id = mAB.getId();
-            markerMap.put(id, "mAB");
-
-            // MARKER: THE ITALIAN CORNER RESTAURANT
-            Marker mIC = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(53.345644, -6.264745))
-                    .title("The Italian Corner Restaurant")
-                    .snippet("23/24 Wellington Quay, Dublin 2")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-            // Hashmap array entry
-            id = mIC.getId();
-            markerMap.put(id, "mIC");
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-
-
-            // *** Loading the map up to the current location ***
-
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-
-            Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-            if (location != null) {
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(location.getLatitude(), location.getLongitude()), 15));
-
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(location.getLatitude(), location.getLongitude()))     // Sets the center of the map to location user
-                        .zoom(15)                   // Sets the zoom
-                                //  .bearing(30)                // Sets the orientation of the camera to east
-                        .tilt(10)                   // Sets the tilt of the camera to 30 degrees
-                        .build();                   // Creates a CameraPosition from the builder
-
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-            }
-
-
-            mMap.setMyLocationEnabled(true);
-            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
-
-
-            // *** FOR CONTROLS ON THE MAP ITSELF ***
-            UiSettings settings = mMap.getUiSettings();
-            settings.setCompassEnabled(true);
-            settings.setRotateGesturesEnabled(true);
-            settings.setScrollGesturesEnabled(true);
-            settings.setTiltGesturesEnabled(true);
-            settings.setZoomControlsEnabled(true);
-            settings.setZoomGesturesEnabled(true);
-            settings.setMapToolbarEnabled(true);
-
-            /** OF ELSE RESTAURANT STATEMENT **
-
-
-        }
-        //} */
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -1087,8 +619,3 @@ public class MapsActivity extends AppCompatActivity {
     }
 
 }
-
-
-
-
-
