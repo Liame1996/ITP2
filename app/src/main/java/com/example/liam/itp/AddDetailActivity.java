@@ -44,7 +44,7 @@ public class AddDetailActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(nameField.getText().toString().isEmpty() || addressField.getText().toString().isEmpty() || emailField.getText().toString().isEmpty() || phoneField.getText().toString().isEmpty()){
+                if(nameField.getText().toString().isEmpty() || addressField.getText().toString().isEmpty() || !emailField.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+") || phoneField.getText().toString().isEmpty()){
                     ShowMessage("Please fill in all details!");
                 }
                 else{
@@ -53,7 +53,6 @@ public class AddDetailActivity extends AppCompatActivity {
                     addressField.setText(null);
                     emailField.setText(null);
                     phoneField.setText(null);
-
                 }
             }
         });
