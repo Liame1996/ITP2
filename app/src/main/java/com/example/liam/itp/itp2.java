@@ -26,7 +26,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+ * created by Liam English, x14341261
+ */
+
 public class itp2 extends AppCompatActivity {
+
+    //https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -35,28 +42,10 @@ public class itp2 extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Fragment> fragmentList;
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        // Logs 'install' and 'app activate' App Events.
-//        AppEventsLogger.activateApp(this);
-//    }
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        // Logs 'app deactivate' App Event.
-//        AppEventsLogger.deactivateApp(this);
-//    }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itp2);
-        //FacebookSdk.sdkInitialize(getApplicationContext());
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -134,6 +123,11 @@ public class itp2 extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+
+    /**
+     * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+     */
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
