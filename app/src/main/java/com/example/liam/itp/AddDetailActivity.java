@@ -14,6 +14,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+/**
+ * @reference https://www.youtube.com/user/BowToKingBen
+ * Created by Evan on 13/02/2016.
+ */
+
 public class AddDetailActivity extends AppCompatActivity {
 
     private EditText nameField, addressField, emailField, phoneField;
@@ -102,6 +107,9 @@ public class AddDetailActivity extends AppCompatActivity {
         Toast.makeText(AddDetailActivity.this, msg, Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     private class AddDetails extends AsyncTask<Void, Void, Void> {
         String name, type, address, email;
         int phone;
