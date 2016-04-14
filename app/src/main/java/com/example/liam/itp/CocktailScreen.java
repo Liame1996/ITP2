@@ -26,7 +26,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+ * created by Liam English, x14341261
+ */
 public class CocktailScreen extends AppCompatActivity {
+
+    //https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -134,6 +140,9 @@ public class CocktailScreen extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+
+    //https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+        
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {

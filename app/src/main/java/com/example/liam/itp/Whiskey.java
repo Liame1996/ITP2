@@ -9,9 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
- * Created by Liam on 31/03/2016.
+ * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+ * Created by Liam English, x14341261, on 06/03/2016.
  */
 public class Whiskey extends Fragment {
+
+    /**
+     * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+     */
 
     public static Whiskey newInstance() {
         Whiskey whiskey = new Whiskey();

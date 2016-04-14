@@ -9,9 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 /**
- * Created by Liam on 06/03/2016.
+ * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+ * Created by Liam English, x14341261, on 06/03/2016.
  */
 public class FragmentTwo extends Fragment{
+
+    /**
+     * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+     */
 
     public static FragmentTwo newInstance() {
         FragmentTwo fragment = new FragmentTwo();

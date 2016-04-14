@@ -10,9 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 /**
- * Created by Liam on 06/03/2016.
+ * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+ * Created by Liam English, x14341261, on 06/03/2016.
  */
 public class FragmentOne extends Fragment {
+
+    /**
+     * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
+     */
 
     public static FragmentOne newInstance() {
         FragmentOne fragment = new FragmentOne();
@@ -71,6 +76,7 @@ public class FragmentOne extends Fragment {
                     getActivity().startActivity(i);
                 }
             });
+
         return view;
     }
 
