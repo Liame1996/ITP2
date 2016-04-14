@@ -11,18 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.example.liam.itp.DBHelper;
 
 public class AddDetailActivity extends AppCompatActivity {
 
     private EditText nameField, addressField, emailField, phoneField;
     private Spinner typeField;
-    private Button addBtn, displayBtn;
-    private ImageButton homeBtn, locationBtn, addVenueBtn, cocktailsBtn;
+    private Button addBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +35,6 @@ public class AddDetailActivity extends AppCompatActivity {
         phoneField = (EditText)findViewById(R.id.phoneET);
 
         addBtn = (Button)findViewById(R.id.addBtn);
-        homeBtn = (ImageButton) findViewById(R.id.homeBtn);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override

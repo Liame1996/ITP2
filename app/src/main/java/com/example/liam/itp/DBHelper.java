@@ -2,8 +2,6 @@ package com.example.liam.itp;
 
 import android.util.Log;
 
-import com.example.liam.itp.AppConfig;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +11,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 
 /**
+ * @reference https://www.youtube.com/user/BowToKingBen
  * Created by Evan on 13/02/2016.
  */
 public class DBHelper {

@@ -1,34 +1,21 @@
 package com.example.liam.itp;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.SystemClock;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.liam.itp.DBHelper;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -40,13 +27,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
+/**
+ * @reference https://www.youtube.com/user/BowToKingBen
+ * @reference http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+ * Created by Evan on 13/02/2016.
+ */
 public class DisplayActivity extends AppCompatActivity {
 
     private TextView nameV, typeV, addressV, emailV, phoneV, tvHour, tvMinute, tvSecond, openClose, openingClosing;
@@ -189,6 +179,9 @@ public class DisplayActivity extends AppCompatActivity {
         tvSecond = (TextView) findViewById(R.id.txtTimerSecond);
     }
 
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void DiceysCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -275,6 +268,9 @@ public class DisplayActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 0);
     }
 
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void PalaceCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -361,6 +357,9 @@ public class DisplayActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 0);
     }
 
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void DtwoCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -447,6 +446,9 @@ public class DisplayActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 0);
     }
 
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void EverleighCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -716,6 +718,9 @@ public class DisplayActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 0);
     }
 
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void CoppersCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -801,6 +806,10 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void SinnottsCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -1069,6 +1078,10 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void OreillysCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -1337,6 +1350,10 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void TrinityCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -1483,6 +1500,10 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void LagoonaCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -1691,6 +1712,10 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void TempleCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -1898,6 +1923,9 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void CaptainsCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -1983,6 +2011,9 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void TgifCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -2129,6 +2160,9 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void CounterCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -2336,6 +2370,9 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void AussiebbqCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -2482,6 +2519,9 @@ public class DisplayActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 0);
     }
+    /**
+     * http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+     */
     public void ItalianCountDownStart() {
         handler = new Handler();
         runnable = new Runnable() {
@@ -2568,6 +2608,9 @@ public class DisplayActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 0);
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
         //DICEYS DETAILS
         public class getDiceysDetails extends AsyncTask<Void, Void, Void> {
             private ProgressDialog pDialog;
@@ -2685,6 +2728,9 @@ public class DisplayActivity extends AppCompatActivity {
             }
         }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //PALACE DETAILS
     public class getPalaceDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -2800,6 +2846,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //EVERLEIGH DETAILS
     public class getEverleighDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -2917,6 +2966,9 @@ public class DisplayActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //DTWO DETAILS
     public class getDtwoDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -3034,6 +3086,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //COPPERS DETAILS
     public class getCoppersDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -3152,7 +3207,9 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //SINNOTTS DETAILS
     private class getSinnottsDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -3270,6 +3327,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //OREILLYS DETAILS
     private class getOreillysDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -3390,6 +3450,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //TRINITY BAR DETAILS
     private class getTrinityDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -3509,6 +3572,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //LAGOONA DETAILS
     private class getLagoonaDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -3627,6 +3693,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //TEMPLE BAR DETAILS
     private class getTempleDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -3746,6 +3815,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //CAPTAINS DETAILS
     private class getCaptainsDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -3866,6 +3938,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //TGIF DETAILS
     private class getTgifDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -3985,6 +4060,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //COUNTER DETAILS
     private class getCounterDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -4104,6 +4182,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //AUSSIEBBQ DETAILS
     private class getAussiebbqDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -4223,6 +4304,9 @@ public class DisplayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @reference https://www.youtube.com/user/BowToKingBen
+     */
     //ITALIAN DETAILS
     private class getItalianDetails extends AsyncTask<Void, Void, Void> {
         private ProgressDialog pDialog;
@@ -4343,739 +4427,6 @@ public class DisplayActivity extends AppCompatActivity {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.345644, -6.264745), 17.0f));
         }
     }
-
-//    //WHISKEY DETAILS
-//    private class getWhiskeyDetails extends AsyncTask<Void, Void, Void> {
-//        private ProgressDialog pDialog;
-//
-//        @Override
-//        protected void onPreExecute(){
-//            pDialog = new ProgressDialog(DisplayActivity.this);
-//            pDialog.setCancelable(false);
-//            pDialog.setMessage("Getting details...");
-//            showDialog();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            DBHelper db = new DBHelper();
-//            details = db.getBarDetails();
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void r){
-//            hideDialog();
-//            try {
-//                if (details != null && details.next()) {
-//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-//                }
-//                else{
-//                    ShowMessage("No details found");
-//                }
-//            }
-//            catch(SQLException s){
-//                Log.e("Erro", s.getMessage());
-//            }
-//        }
-//
-//        private void showDialog() {
-//            if (!pDialog.isShowing()) {
-//                pDialog.show();
-//            }
-//        }
-//
-//        private void hideDialog(){
-//            if(pDialog.isShowing()){
-//                pDialog.dismiss();
-//            }
-//        }
-//    }
-//
-//    //VODKA DETAILS
-//    private class getVodkaDetails extends AsyncTask<Void, Void, Void> {
-//        private ProgressDialog pDialog;
-//
-//        @Override
-//        protected void onPreExecute(){
-//            pDialog = new ProgressDialog(DisplayActivity.this);
-//            pDialog.setCancelable(false);
-//            pDialog.setMessage("Getting details...");
-//            showDialog();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            DBHelper db = new DBHelper();
-//            details = db.getBarDetails();
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void r){
-//            hideDialog();
-//            try {
-//                if (details != null && details.next()) {
-//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-//                }
-//                else{
-//                    ShowMessage("No details found");
-//                }
-//            }
-//            catch(SQLException s){
-//                Log.e("Erro", s.getMessage());
-//            }
-//        }
-//
-//        private void showDialog() {
-//            if (!pDialog.isShowing()) {
-//                pDialog.show();
-//            }
-//        }
-//
-//        private void hideDialog(){
-//            if(pDialog.isShowing()){
-//                pDialog.dismiss();
-//            }
-//        }
-//    }
-//
-//    //BRANDY DETAILS
-//    private class getBrandyDetails extends AsyncTask<Void, Void, Void> {
-//        private ProgressDialog pDialog;
-//
-//        @Override
-//        protected void onPreExecute(){
-//            pDialog = new ProgressDialog(DisplayActivity.this);
-//            pDialog.setCancelable(false);
-//            pDialog.setMessage("Getting details...");
-//            showDialog();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            DBHelper db = new DBHelper();
-//            details = db.getBarDetails();
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void r){
-//            hideDialog();
-//            try {
-//                if (details != null && details.next()) {
-//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-//                }
-//                else{
-//                    ShowMessage("No details found");
-//                }
-//            }
-//            catch(SQLException s){
-//                Log.e("Erro", s.getMessage());
-//            }
-//        }
-//
-//        private void showDialog() {
-//            if (!pDialog.isShowing()) {
-//                pDialog.show();
-//            }
-//        }
-//
-//        private void hideDialog(){
-//            if(pDialog.isShowing()){
-//                pDialog.dismiss();
-//            }
-//        }
-//    }
-//
-//    //RUM DETAILS
-//    private class getRumDetails extends AsyncTask<Void, Void, Void> {
-//        private ProgressDialog pDialog;
-//
-//        @Override
-//        protected void onPreExecute(){
-//            pDialog = new ProgressDialog(DisplayActivity.this);
-//            pDialog.setCancelable(false);
-//            pDialog.setMessage("Getting details...");
-//            showDialog();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            DBHelper db = new DBHelper();
-//            details = db.getBarDetails();
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void r){
-//            hideDialog();
-//            try {
-//                if (details != null && details.next()) {
-//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-//                }
-//                else{
-//                    ShowMessage("No details found");
-//                }
-//            }
-//            catch(SQLException s){
-//                Log.e("Erro", s.getMessage());
-//            }
-//        }
-//
-//        private void showDialog() {
-//            if (!pDialog.isShowing()) {
-//                pDialog.show();
-//            }
-//        }
-//
-//        private void hideDialog(){
-//            if(pDialog.isShowing()){
-//                pDialog.dismiss();
-//            }
-//        }
-//    }
-//
-//    //TEQUILA DETAILS
-//    private class getTequilaDetails extends AsyncTask<Void, Void, Void> {
-//        private ProgressDialog pDialog;
-//
-//        @Override
-//        protected void onPreExecute(){
-//            pDialog = new ProgressDialog(DisplayActivity.this);
-//            pDialog.setCancelable(false);
-//            pDialog.setMessage("Getting details...");
-//            showDialog();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            DBHelper db = new DBHelper();
-//            details = db.getBarDetails();
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void r){
-//            hideDialog();
-//            try {
-//                if (details != null && details.next()) {
-//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-//                }
-//                else{
-//                    ShowMessage("No details found");
-//                }
-//            }
-//            catch(SQLException s){
-//                Log.e("Erro", s.getMessage());
-//            }
-//        }
-//
-//        private void showDialog() {
-//            if (!pDialog.isShowing()) {
-//                pDialog.show();
-//            }
-//        }
-//
-//        private void hideDialog(){
-//            if(pDialog.isShowing()){
-//                pDialog.dismiss();
-//            }
-//        }
-//    }
-//
-//    //GIN DETAILS
-//    private class getGinDetails extends AsyncTask<Void, Void, Void> {
-//        private ProgressDialog pDialog;
-//
-//        @Override
-//        protected void onPreExecute(){
-//            pDialog = new ProgressDialog(DisplayActivity.this);
-//            pDialog.setCancelable(false);
-//            pDialog.setMessage("Getting details...");
-//            showDialog();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            DBHelper db = new DBHelper();
-//            details = db.getBarDetails();
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void r){
-//            hideDialog();
-//            try {
-//                if (details != null && details.next()) {
-//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-//                }
-//                else{
-//                    ShowMessage("No details found");
-//                }
-//            }
-//            catch(SQLException s){
-//                Log.e("Erro", s.getMessage());
-//            }
-//        }
-//
-//        private void showDialog() {
-//            if (!pDialog.isShowing()) {
-//                pDialog.show();
-//            }
-//        }
-//
-//        private void hideDialog(){
-//            if(pDialog.isShowing()){
-//                pDialog.dismiss();
-//            }
-//        }
-//    }
-//
-//    //BEER DETAILS
-//    private class getBeerDetails extends AsyncTask<Void, Void, Void> {
-//        private ProgressDialog pDialog;
-//
-//        @Override
-//        protected void onPreExecute(){
-//            pDialog = new ProgressDialog(DisplayActivity.this);
-//            pDialog.setCancelable(false);
-//            pDialog.setMessage("Getting details...");
-//            showDialog();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            DBHelper db = new DBHelper();
-//            details = db.getBarDetails();
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void r){
-//            hideDialog();
-//            try {
-//                if (details != null && details.next()) {
-//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-//                }
-//                else{
-//                    ShowMessage("No details found");
-//                }
-//            }
-//            catch(SQLException s){
-//                Log.e("Erro", s.getMessage());
-//            }
-//        }
-//
-//        private void showDialog() {
-//            if (!pDialog.isShowing()) {
-//                pDialog.show();
-//            }
-//        }
-//
-//        private void hideDialog(){
-//            if(pDialog.isShowing()){
-//                pDialog.dismiss();
-//            }
-//        }
-//    }
-//
-//    //CIDER DETAILS
-//    private class getCiderDetails extends AsyncTask<Void, Void, Void> {
-//        private ProgressDialog pDialog;
-//
-//        @Override
-//        protected void onPreExecute(){
-//            pDialog = new ProgressDialog(DisplayActivity.this);
-//            pDialog.setCancelable(false);
-//            pDialog.setMessage("Getting details...");
-//            showDialog();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            DBHelper db = new DBHelper();
-//            details = db.getBarDetails();
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void r){
-//            hideDialog();
-//            try {
-//                if (details != null && details.next()) {
-//                    display(details.getString("Title"), details.getString("Image"),details.getString("Ingredients"),details.getString("Description"),details.getString("Fact") +"");
-//                }
-//                else{
-//                    ShowMessage("No details found");
-//                }
-//            }
-//            catch(SQLException s){
-//                Log.e("Erro", s.getMessage());
-//            }
-//        }
-//
-//        private void showDialog() {
-//            if (!pDialog.isShowing()) {
-//                pDialog.show();
-//            }
-//        }
-//
-//        private void hideDialog(){
-//            if(pDialog.isShowing()){
-//                pDialog.dismiss();
-//            }
-//        }
-//    }
-
-
-
-/*
-
-    // ******** FOR MAP ************ - CM
-    //private GoogleMap mMap;
-
-
-    // CODE TAKEN FROM TECH ACADEMY TUTORIAL
-
-
-
- @Override
-    protected void onResume() {
-        super.onResume();
-        setUpMapIfNeeded();
-    }
-
-
-
-   private void setUpMapIfNeeded() {
-        if (mMap == null) {
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-
-            if (mMap != null) {
-                setUpMap();
-
-                // *** Code for infowindow ***
-                // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
-                mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-                    @Override
-                    public View getInfoWindow(Marker marker) {
-                        return null;
-                    }
-
-                    @Override
-                    public View getInfoContents(Marker marker) {
-
-                        View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
-                        TextView tvName = (TextView) v.findViewById(R.id.tv_name);
-                        TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
-                        //  TextView tvHours = (TextView) v.findViewById(R.id.tv_maphours);
-
-                        // LatLng ll = marker.getPosition();
-
-                        tvName.setText(marker.getTitle());
-                        tvAddress.setText(marker.getSnippet());
-                        // tvHours.setText(marker.getSnippet());
-
-                        return v;
-                    }
-                });
-
-                // *** For a new activity to open when info window is clicked ***
-
-                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                    @Override
-                    public void onInfoWindowClick(Marker marker) {
-                        // To access hashmap array to bring to different activities
-                        String m = markerMap.get(marker.getId());
-
-                        if (m.equals("mCA")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mOR")) {
-                            Intent i = new Intent(DisplayActivity.this, AddDetailActivity.class);
-                            startActivity(i);
-                        } else if (m.equals("mTP")) {
-                            Intent i = new Intent(DisplayActivity.this, CocktailScreen.class);
-                            startActivity(i);
-                        } else if (m.equals("mTGIF")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mSI")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mDG")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mD2")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mEG")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mCFJ")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mTB")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mLA")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mTemB")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mTC")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mAB")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        } else if (m.equals("mIC")) {
-                            Intent i = new Intent(DisplayActivity.this, itp2.class);
-                            startActivity(i);
-                        }
-
-                        // Use code below if you want all infowindows to bring you to the same window
-                        //  Intent intent = new Intent(MapsActivity.this, itp2.class);
-                        // startActivity(intent);
-                    }
-                });
-            }
-        }
-
-    }
-
-
-    public void setUpMap() {
-
-        String id = null;
-
-
-*//* USE IF STATEMENTS TO SELECT MARKERS SHOWN ACCORDING TO WHAT IS SELECTED IN THE DROPDOWN MENU *//*
-
-
-        // MARKER: CAPTAIN AMERICAS
-
-        Marker mCA = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.3405075, -6.2628862))
-                .title("Captain America's")
-                .snippet("44 Grafton St, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-
-        // Hashmap array entry
-        id = mCA.getId();
-        markerMap.put(id, "mCA");
-
-
-        // MARKER:O'REILLYS
-        Marker mOR = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.3469988, -6.2563745))
-                .title("O'Reillys")
-                .snippet("2 Poolbeg St, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-        // Hashmap array entry
-        id = mOR.getId();
-        markerMap.put(id, "mOR");
-
-
-        // MARKER: THE PALACE
-        Marker mTP = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.335940, -6.265624))
-                .title("The Palace")
-                .snippet("84-87 Camden Street Lower, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-        // Hashmap array entry
-        id = mTP.getId();
-        markerMap.put(id, "mTP");
-
-
-        // MARKER: TGI FRIDAYS
-        Marker mTGIF = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.3397012, -6.2634227))
-                .title("Tgi Friday's")
-                .snippet("St Stephen's Green, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-        // Hashmap array entry
-        id = mTGIF.getId();
-        markerMap.put(id, "mTGIF");
-
-
-        // MARKER:SINNOTTS
-        Marker mSI = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.340136, -6.2637727))
-                .title("Sinnotts")
-                .snippet("South King Street, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-        // Hashmap array entry
-        id = mSI.getId();
-        markerMap.put(id, "mSI");
-
-
-        // MARKER: DICEYS GARDEN
-        Marker mDG = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.335719, -6.263619))
-                .title("Dicey's Garden")
-                .snippet("21-25 Harcourt St, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-        // Hashmap array entry
-        id = mDG.getId();
-        markerMap.put(id, "mDG");
-
-
-        // MARKER: DTWO
-        Marker mD2 = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.334425, -6.262743))
-                .title("DTwo")
-                .snippet("60 Harcourt St, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-        // Hashmap array entry
-        id = mD2.getId();
-        markerMap.put(id, "mD2");
-
-
-        // MARKER: EVERLEIGH GARDEN'S
-        Marker mEG = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.335181, -6.263543))
-                .title("Everleigh Garden's")
-                .snippet("33 Harcourt St, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-        // Hashmap array entry
-        id = mEG.getId();
-        markerMap.put(id, "mEG");
-
-
-        //MARKER: COPPER FACE JACK'S
-        Marker mCFJ =  mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.335377, -6.263599))
-                .title("Copper Face Jack's")
-                .snippet("29-30 Harcourt St, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-
-        // Hashmap array entry
-        id = mCFJ.getId();
-        markerMap.put(id, "mCFJ");
-
-
-        // MARKER: TRINITY BAR
-        Marker mTB = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.3404330, -6.263613))
-                .title("Trinity Bar")
-                .snippet("46-47 Dame St")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-        // Hashmap array entry
-        id = mTB.getId();
-        markerMap.put(id, "mTB");
-
-
-        // MARKER: LAGOONA
-        Marker mLA = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.349617, -6.243003))
-                .title("Lagoona")
-                .snippet("Unit 4, Custom House Square, Mayor St Lower, Dublin 1")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-        // Hashmap array entry
-        id = mLA.getId();
-        markerMap.put(id, "mLA");
-
-
-        // MARKER: THE TEMPLE BAR
-        Marker mTemB =mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.345475, -6.264189))
-                .title("The Temple Bar")
-                .snippet("247-48 Temple Bar, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-
-        // Hashmap array entry
-        id = mTemB.getId();
-        markerMap.put(id, "mTemB");
-
-
-        // MARKER: THE COUNTER
-        Marker mTC =mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.343368, -6.260031))
-                .title("The Counter")
-                .snippet("20 Suffolk St, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-        // Hashmap array entry
-        id = mTC.getId();
-        markerMap.put(id, "mTC");
-
-
-        // MARKER: AUSSIE BBQ
-        Marker mAB = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.331180, -6.264750))
-                .title("Aussie BBQ")
-                .snippet("45 South Richmond St, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-        // Hashmap array entry
-        id = mAB.getId();
-        markerMap.put(id, "mAB");
-
-        // MARKER: THE ITALIAN CORNER RESTAURANT
-        Marker mIC = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(53.345644, -6.264745))
-                .title("The Italian Corner Restaurant")
-                .snippet("23/24 Wellington Quay, Dublin 2")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-
-        // Hashmap array entry
-        id = mIC.getId();
-        markerMap.put(id, "mIC");
-
-
-
-
-        // Getting more information for infowindow
-
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-
-
-
-
-
-        // FOR CONTROLS ON THE MAP ITSELF
-        UiSettings settings = mMap.getUiSettings();
-        settings.setCompassEnabled( true );
-        settings.setRotateGesturesEnabled( true );
-        settings.setScrollGesturesEnabled( true );
-        settings.setTiltGesturesEnabled( true );
-        settings.setZoomControlsEnabled( true);
-        settings.setZoomGesturesEnabled( true );
-        settings.setMapToolbarEnabled(true);
-
-       // mMap.setMyLocationEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 15.0f));
-
-
-
-    }*/
-
-
-
-
 }
 
 

@@ -1,6 +1,7 @@
 package com.example.liam.itp;
 
 /**
+ * @reference https://www.youtube.com/user/BowToKingBen
  * Created by Evan on 13/02/2016.
  */
 public class AppConfig {
