@@ -372,7 +372,7 @@ public class MapsActivity extends AppCompatActivity {
             if (mMap != null) {
                 setUpMap();
 
-                // *** Code for infowindow ***
+     /*           // *** Code for infowindow ***
                 // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
                 mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                     @Override
@@ -391,11 +391,11 @@ public class MapsActivity extends AppCompatActivity {
                         tvAddress.setText(marker.getSnippet());
                         return v;
                     }
-                });
+                });*/
 
                 // *** For a new activity to open when info window is clicked ***
 
-                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+/*                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                     @Override
                     public void onInfoWindowClick(Marker marker) {
                         // To access hashmap array to bring to different activities
@@ -467,7 +467,7 @@ public class MapsActivity extends AppCompatActivity {
                         //  Intent intent = new Intent(MapsActivity.this, itp2.class);
                         // startActivity(intent);
                     }
-                });
+                });*/
 
 
             }
@@ -476,6 +476,102 @@ public class MapsActivity extends AppCompatActivity {
     }
 
     public void setUpMap() {
+
+
+
+        // *** Code for infowindow ***
+        // Ref Youtube : https://www.youtube.com/watch?v=g7rvqxn8SLg
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+
+                View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+                TextView tvName = (TextView) v.findViewById(R.id.tv_name);
+                TextView tvAddress = (TextView) v.findViewById(R.id.tv_address);
+
+                tvName.setText(marker.getTitle());
+                tvAddress.setText(marker.getSnippet());
+                return v;
+            }
+        });
+
+        // *** For a new activity to open when info window is clicked ***
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                // To access hashmap array to bring to different activities
+                String m = markerMap.get(marker.getId());
+
+                if (m.equals("mCA")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Captains");
+                    startActivity(i);
+                } else if (m.equals("mOR")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Oreillys");
+                    startActivity(i);
+                } else if (m.equals("mTP")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Palace");
+                    startActivity(i);
+                } else if (m.equals("mTGIF")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Tgif");
+                    startActivity(i);
+                } else if (m.equals("mSI")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Sinnotts");
+                    startActivity(i);
+                } else if (m.equals("mDG")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Diceys");
+                    startActivity(i);
+                } else if (m.equals("mD2")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Dtwo");
+                    startActivity(i);
+                } else if (m.equals("mEG")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Everleigh");
+                    startActivity(i);
+                } else if (m.equals("mCFJ")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Coppers");
+                    startActivity(i);
+                } else if (m.equals("mTB")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Trinity");
+                    startActivity(i);
+                } else if (m.equals("mLA")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Lagoona");
+                    startActivity(i);
+                } else if (m.equals("mTemB")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Temple");
+                    startActivity(i);
+                } else if (m.equals("mTC")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Counter");
+                    startActivity(i);
+                } else if (m.equals("mAB")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Aussiebbq");
+                    startActivity(i);
+                } else if (m.equals("mIC")) {
+                    Intent i = new Intent(MapsActivity.this, DisplayActivity.class);
+                    i.putExtra("Extra", "Italian");
+                    startActivity(i);
+                }
+            }
+        });
+
 
 
         String id = null;
@@ -664,254 +760,6 @@ public class MapsActivity extends AppCompatActivity {
         markerMap.put(id, "mIC");
 
 
-//        if(spinner.getSelectedItem().toString().equals("All")){
-//            mCA.setVisible(true);
-//            mOR.setVisible(true);
-//            mTP.setVisible(true);
-//            mTGIF.setVisible(true);
-//            mSI.setVisible(true);
-//            mDG.setVisible(true);
-//            mD2.setVisible(true);
-//            mEG.setVisible(true);
-//            mCFJ.setVisible(true);
-//            mTB.setVisible(true);
-//            mLA.setVisible(true);
-//            mTemB.setVisible(true);
-//            mAB.setVisible(true);
-//            mIC.setVisible(true);
-//            mTC.setVisible(true);
-//        }else if(spinner.getSelectedItem().toString().equals("Clubs")){
-//            mCA.setVisible(false);
-//            mOR.setVisible(false);
-//            mTP.setVisible(true);
-//            mTGIF.setVisible(false);
-//            mSI.setVisible(false);
-//            mDG.setVisible(true);
-//            mD2.setVisible(true);
-//            mEG.setVisible(true);
-//            mCFJ.setVisible(true);
-//            mTB.setVisible(false);
-//            mLA.setVisible(false);
-//            mTemB.setVisible(false);
-//            mAB.setVisible(false);
-//            mIC.setVisible(false);
-//            mTC.setVisible(false);
-//        }else if(spinner.getSelectedItem().toString().equals("Bars")){
-//            mCA.setVisible(false);
-//            mOR.setVisible(true);
-//            mTP.setVisible(false);
-//            mTGIF.setVisible(false);
-//            mSI.setVisible(true);
-//            mDG.setVisible(false);
-//            mD2.setVisible(false);
-//            mEG.setVisible(false);
-//            mCFJ.setVisible(false);
-//            mTB.setVisible(true);
-//            mLA.setVisible(true);
-//            mTemB.setVisible(true);
-//            mAB.setVisible(false);
-//            mIC.setVisible(false);
-//            mTC.setVisible(false);
-//        }else if(spinner.getSelectedItem().toString().equals("Restaurants")){
-//            mCA.setVisible(true);
-//            mOR.setVisible(false);
-//            mTP.setVisible(false);
-//            mTGIF.setVisible(true);
-//            mSI.setVisible(false);
-//            mDG.setVisible(false);
-//            mD2.setVisible(false);
-//            mEG.setVisible(false);
-//            mCFJ.setVisible(false);
-//            mTB.setVisible(false);
-//            mLA.setVisible(false);
-//            mTemB.setVisible(false);
-//            mAB.setVisible(true);
-//            mIC.setVisible(true);
-//            mTC.setVisible(true);
-//        }
-//        else if(spinner.getSelectedItem().toString().equals("Clubs")){
-//            mCA.setVisible(false);
-//            mOR.setVisible(false);
-//            mTP.setVisible(false);
-//            // MARKER: DICEYS GARDEN
-//             mDG = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.335719, -6.263619))
-//                    .title("Dicey's Garden")
-//                    .snippet("21-25 Harcourt St, Dublin 2")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-//
-//            // Hashmap array entry
-//            id = mDG.getId();
-//            markerMap.put(id, "mDG");
-//
-//
-//            // MARKER: DTWO
-//             mD2 = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.334425, -6.262743))
-//                    .title("DTwo")
-//                    .snippet("60 Harcourt St, Dublin 2")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-//
-//            // Hashmap array entry
-//            id = mD2.getId();
-//            markerMap.put(id, "mD2");
-//
-//
-//            // MARKER: EVERLEIGH GARDEN'S
-//             mEG = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.335181, -6.263543))
-//                    .title("Everleigh Garden's")
-//                    .snippet("33 Harcourt St, Dublin 2")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-//
-//            // Hashmap array entry
-//            id = mEG.getId();
-//            markerMap.put(id, "mEG");
-//
-//
-//            //MARKER: COPPER FACE JACK'S
-//             mCFJ = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.335377, -6.263599))
-//                    .title("Copper Face Jack's")
-//                    .snippet("29-30 Harcourt St, Dublin 2")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-//
-//            // Hashmap array entry
-//            id = mCFJ.getId();
-//            markerMap.put(id, "mCFJ");
-//
-//
-//            // MARKER: THE PALACE
-//             mTP = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.335940, -6.265624))
-//                    .title("The Palace")
-//                    .snippet("84-87 Camden Street Lower, Dublin 2")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.m_cocktail)));
-//
-//            // Hashmap array entry
-//            id = mTP.getId();
-//            markerMap.put(id, "mTP");
-//
-//        }else if(spinner.getSelectedItem().toString().equals("Bars")){
-//            mMap.clear();
-//            // MARKER:O'REILLYS
-//             mOR = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.3469988, -6.2563745))
-//                    .title("O'Reillys")
-//                    .snippet("2 Poolbeg St, Dublin 2")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-//
-//            // Hashmap array entry
-//            id = mOR.getId();
-//            markerMap.put(id, "mOR");
-//
-//            // MARKER: TRINITY BAR
-//             mTB = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.3404330, -6.263613))
-//                    .title("Trinity Bar")
-//                    .snippet("46-47 Dame St")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-//
-//            // Hashmap array entry
-//            id = mTB.getId();
-//            markerMap.put(id, "mTB");
-//
-//
-//            // MARKER: LAGOONA
-//             mLA = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.349617, -6.243003))
-//                    .title("Lagoona")
-//                    .snippet("Unit 4, Custom House Square, Mayor St Lower, Dublin 1")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-//
-//            // Hashmap array entry
-//            id = mLA.getId();
-//            markerMap.put(id, "mLA");
-//
-//
-//            // MARKER: THE TEMPLE BAR
-//             mTemB = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.345475, -6.264189))
-//                    .title("The Temple Bar")
-//                    .snippet("247-48 Temple Bar, Dublin 2")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-//
-//            // Hashmap array entry
-//            id = mTemB.getId();
-//            markerMap.put(id, "mTemB");
-//
-//            // MARKER:SINNOTTS
-//             mSI = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(53.340136, -6.2637727))
-//                    .title("Sinnotts")
-//                    .snippet("South King Street, Dublin 2")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pint)));
-//
-//            // Hashmap array entry
-//            id = mSI.getId();
-//            markerMap.put(id, "mSI");
-//
-//        }else if(spinner.getSelectedItem().toString().equals("Restaurants")){
-//            mMap.clear();
-//        // MARKER: THE COUNTER
-//         mTC = mMap.addMarker(new MarkerOptions()
-//                .position(new LatLng(53.343368, -6.260031))
-//                .title("The Counter")
-//                .snippet("20 Suffolk St, Dublin 2")
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-//
-//        // Hashmap array entry
-//        id = mTC.getId();
-//        markerMap.put(id, "mTC");
-//
-//
-//        // MARKER: AUSSIE BBQ
-//         mAB = mMap.addMarker(new MarkerOptions()
-//                .position(new LatLng(53.331180, -6.264750))
-//                .title("Aussie BBQ")
-//                .snippet("45 South Richmond St, Dublin 2")
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-//
-//        // Hashmap array entry
-//        id = mAB.getId();
-//        markerMap.put(id, "mAB");
-//
-//        // MARKER: THE ITALIAN CORNER RESTAURANT
-//         mIC = mMap.addMarker(new MarkerOptions()
-//                .position(new LatLng(53.345644, -6.264745))
-//                .title("The Italian Corner Restaurant")
-//                .snippet("23/24 Wellington Quay, Dublin 2")
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-//
-//        // Hashmap array entry
-//        id = mIC.getId();
-//        markerMap.put(id, "mIC");
-//
-//        // MARKER: CAPTAIN AMERICAS
-//         mCA = mMap.addMarker(new MarkerOptions()
-//                .position(new LatLng(53.3405075, -6.2628862))
-//                .title("Captain America's")
-//                .snippet("44 Grafton St, Dublin 2")
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-//
-//
-//        // Hashmap array entry
-//        id = mCA.getId();
-//        markerMap.put(id, "mCA");
-//
-//        // MARKER: TGI FRIDAYS
-//         mTGIF = mMap.addMarker(new MarkerOptions()
-//                .position(new LatLng(53.3397012, -6.2634227))
-//                .title("Tgi Friday's")
-//                .snippet("St Stephen's Green, Dublin 2")
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cutlery)));
-//
-//        // Hashmap array entry
-//        id = mTGIF.getId();
-//        markerMap.put(id, "mTGIF");
-//    }
-
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -936,7 +784,7 @@ public class MapsActivity extends AppCompatActivity {
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new LatLng(location.getLatitude(), location.getLongitude()))     // Sets the center of the map to location user
-                    .zoom(17)                   // Sets the zoom
+                    .zoom(11)                   // Sets the zoom
                     .tilt(10)                   // Sets the tilt of the camera to 30 degrees
                     .build();                   // Creates a CameraPosition from the builder
 
