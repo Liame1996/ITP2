@@ -936,15 +936,12 @@ public class MapsActivity extends AppCompatActivity {
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new LatLng(location.getLatitude(), location.getLongitude()))     // Sets the center of the map to location user
-                    .zoom(16)                   // Sets the zoom
-                            //  .bearing(30)                // Sets the orientation of the camera to east
+                    .zoom(17)                   // Sets the zoom
                     .tilt(10)                   // Sets the tilt of the camera to 30 degrees
                     .build();                   // Creates a CameraPosition from the builder
 
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
         }
-
 
         mMap.setMyLocationEnabled(true);
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.3482961, -6.257899), 12.0f));
@@ -961,5 +958,4 @@ public class MapsActivity extends AppCompatActivity {
         settings.setMapToolbarEnabled(true);
 
     }
-
 }
