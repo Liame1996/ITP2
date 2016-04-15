@@ -2613,7 +2613,33 @@ public class DisplayActivity extends AppCompatActivity {
     /**
      * @reference https://www.youtube.com/user/BowToKingBen
      */
-        //DICEYS DETAILS
+
+
+    /**
+     * @author: caoimhemalone x14447022
+     * @reference https://www.youtube.com/watch?v=NHXa96-r8TY YouTube: TechAcademy
+     * @reference https://www.youtube.com/watch?v=92f4c2vHrPg YouTube: PRABEESH R K
+     * Used to create map
+     */
+
+
+    /**
+     * @reference https://www.youtube.com/watch?v=g7rvqxn8SLg YouTube: zat mit
+     * For InfoWindow
+     */
+
+
+    /**
+     * @reference https://www.youtube.com/watch?v=brOT34K57bo YouTube: zat mit
+     * For Markers
+     */
+
+
+    /**
+     * @reference https://developers.google.com/maps/documentation/android-api/controls#ui_controls
+     * For controls on map
+     * */
+    //DICEYS DETAILS
         public class getDiceysDetails extends AsyncTask<Void, Void, Void> {
             private ProgressDialog pDialog;
             private GoogleMap mMap;

@@ -1,8 +1,6 @@
 <!-- author: @caoimhemalone x14447022 -->
 
 
-
-
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,8 +15,6 @@
     tools:context="com.example.liam.itp.MapsActivity"
     tools:showIn="@layout/activity_maps">
 
-  <!--  <include layout="@layout/navbar_display"
-        android:id="@+id/navBar"/>-->
 
     <LinearLayout
         android:orientation="vertical"
@@ -91,32 +87,6 @@
             android:layout_marginTop="20dp">
 
 
-<!--
-            <EditText
-                android:layout_width="265dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/TFaddress"
-                android:gravity="center"
-                android:layout_marginLeft="10dp"
-                android:hint="Enter full address"
-                android:layout_marginTop="10dp"
-                android:inputType="text"
-                android:imeOptions="actionDone"/>
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Search"
-                android:id="@+id/SearchBTN"
-                android:onClick="onSearch"
-                android:background="#85C02F"
-                android:textColor="#fdfdfd"
-                android:layout_marginRight="10dp"
-                android:textAlignment="center"
-                android:layout_weight="5"
-                android:layout_marginTop="5dp" /> -->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,45 +154,6 @@
 
         </LinearLayout>
 
-       <!-- <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/typeHolder"
-            android:weightSum="1"
-            android:layout_marginTop="10dp">
-
-
-             <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="+"
-                android:id="@+id/zoomIn"
-                android:textSize="30sp"
-                android:onClick="onZoom"
-                android:layout_marginLeft="145dp"
-                android:textAlignment="center"
-                android:background="#85C02F"
-                android:textColor="#fdfcfc" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="-"
-                android:id="@+id/zoomOut"
-                android:textSize="30sp"
-                android:onClick="onZoom"
-                android:textAlignment="center"
-                android:background="#85C02F"
-                android:textColor="#fdfcfc"
-                android:layout_marginRight="10dp" />
-
-
-        </LinearLayout> -->
-
     </LinearLayout>
-
 
 </RelativeLayout>
