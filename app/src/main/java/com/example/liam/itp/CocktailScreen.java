@@ -1,11 +1,6 @@
 package com.example.liam.itp;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -14,21 +9,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * CocktailScreen.java
  * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
- * created by Liam English, x14341261
+ * 06/03/2016
+ * @author Liam English, x14341261
  */
 public class CocktailScreen extends AppCompatActivity {
 
@@ -115,7 +106,7 @@ public class CocktailScreen extends AppCompatActivity {
             return true;
         }
         if (id == R.id.homeBtn) {
-            Intent i = new Intent(this, itp2.class);
+            Intent i = new Intent(this, Home.class);
             startActivity(i);
             finish();
             return true;

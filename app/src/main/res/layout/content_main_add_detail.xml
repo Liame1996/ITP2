@@ -20,8 +20,8 @@
     android:id="@+id/scrollView"
     android:layout_alignParentStart="false"
     android:layout_alignParentEnd="false"
-    android:layout_alignParentTop="false"
-    android:layout_below="@id/navBar">
+    android:layout_alignParentTop="false">
+    <!--android:layout_below="@id/navBar">-->
 
     <LinearLayout
         android:orientation="vertical"

@@ -17,6 +17,12 @@ import android.widget.Toast;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * FactsActivity.java
+ * @reference https://www.youtube.com/user/BowToKingBen
+ * 06/03/2016
+ * @author John Cahill, x14378581
+ */
 public class FactsActivity extends AppCompatActivity {
     private TextView TitleV, IngredientsV, DescriptionV, FactV;
     private Button prevButton, nextButton;
@@ -120,7 +126,7 @@ public class FactsActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.homeBtn) {
-            Intent i = new Intent(this, itp2.class);
+            Intent i = new Intent(this, Home.class);
             startActivity(i);
             finish();
             return true;

@@ -11,8 +11,10 @@ import java.sql.Statement;
 import java.util.HashMap;
 
 /**
+ * DBHelper.java
  * @reference https://www.youtube.com/user/BowToKingBen
- * Created by Evan on 13/02/2016.
+ * 13/02/2016.
+ * @author Evan Masterson, x14426302
  */
 public class DBHelper {
     private Connection conn;

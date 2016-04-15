@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
+ * Rum.java
  * @reference https://github.com/benitkibabu/mpad/tree/master/app/src/main/res/layout
- * Created by Liam English, x14341261, on 06/03/2016.
+ * 06/03/2016
+ * @author Liam English, x14341261
  */
 public class Rum extends Fragment {
 

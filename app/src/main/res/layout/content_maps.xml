@@ -15,11 +15,10 @@
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.liam.itp.MapsActivity"
-    tools:showIn="@layout/activity_maps"
-    >
+    tools:showIn="@layout/activity_maps">
 
-    <include layout="@layout/navbar_display"
-        android:id="@+id/navBar"/>
+  <!--  <include layout="@layout/navbar_display"
+        android:id="@+id/navBar"/>-->
 
     <LinearLayout
         android:orientation="vertical"
@@ -88,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/Search"
+            android:id="@+id/Filter"
             android:layout_marginTop="20dp">
 
 
@@ -127,28 +126,27 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginRight="6dp"
-                android:layout_marginBottom="5dp" />
-
-            <!--android:src="@drawable/filter"-->
-
+                android:layout_marginBottom="15dp" />
 
             <!-- USE IF STATEMENTS TO SHOW MARKERS OF ONLY WHAT IS SELECTED, EASIER TO FIGURE OUT THEN CUSTOMISED MAP SEARCH -->
 
             <Spinner
-                android:layout_width="110dp"
+                android:layout_width="160dp"
                 android:layout_height="fill_parent"
                 android:id="@+id/markerDD"
                 android:spinnerMode="dropdown"
                 android:entries="@array/markerType"
                 android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp"/>
-
-
+                android:layout_marginBottom="20dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:touchscreenBlocksFocus="false"
+                android:dropDownWidth="fill_parent"
+                android:dropDownSelector="#21b343" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:orientation="vertical"
@@ -160,7 +158,6 @@
             android:layout_marginRight="0dp"
             android:layout_marginBottom="0dp"
             android:background="#9d222121">
-
 
             <fragment
 
