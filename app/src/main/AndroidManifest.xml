@@ -30,10 +30,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ITP"
-            android:label="WhereNext?"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".DisplayActivity"
             android:label="WhereNext?"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -42,7 +38,7 @@
             android:label="WhereNext?"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".itp2"
+            android:name=".Home"
             android:label="WhereNext?"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -51,10 +47,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainAddDetailActivity"
-            android:label="WhereNext?"
-            android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

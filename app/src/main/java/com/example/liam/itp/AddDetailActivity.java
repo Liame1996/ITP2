@@ -15,8 +15,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
+ * AddDetailActivity.java
  * @reference https://www.youtube.com/user/BowToKingBen
- * Created by Evan on 13/02/2016.
+ * 13/02/2016.
+ * @author Evan Masterson, x14426302
  */
 
 public class AddDetailActivity extends AppCompatActivity {
@@ -82,7 +84,7 @@ public class AddDetailActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.homeBtn) {
-            Intent i = new Intent(this, itp2.class);
+            Intent i = new Intent(this, Home.class);
             startActivity(i);
             finish();
             return true;
