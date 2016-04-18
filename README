@@ -1,0 +1,7 @@
+Change in local.properties the location of your SDK. ie sdk.dir=/Users/Liam/Library/Android/sdk
+
+Need API key for maps, change API in app/res/values/google_maps_api.xml
+
+To look at layout - app/res/layout
+
+All Java files under app/java/com.example.liam.itp (1st option)
